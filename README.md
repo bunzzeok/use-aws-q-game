@@ -12,6 +12,7 @@ A Sudoku game developed with React and TypeScript. Solve puzzles of various diff
 - **오답 제한 (Error Limit)**: 5번 이상 틀리면 게임이 종료됩니다. (Game ends after 5 incorrect entries)
 - **타이머 (Timer)**: 게임 완료 시간을 측정합니다. (Measures completion time)
 - **검증된 퍼즐 (Verified Puzzles)**: 모든 퍼즐은 유일한 해결책을 가지도록 검증됩니다. (All puzzles are verified to have a unique solution)
+- **다크 모드 (Dark Mode)**: 눈의 피로를 줄이는 다크 모드를 지원합니다. (Supports dark mode to reduce eye strain)
 
 ## 🚀 실행 방법 (How to Run)
 
