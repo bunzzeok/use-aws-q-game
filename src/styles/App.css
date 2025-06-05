@@ -1,0 +1,138 @@
+.App {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.App-header {
+  margin-bottom: 20px;
+}
+
+.App-header h1 {
+  color: #333;
+  font-size: 32px;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.timer, .error-count, .hints-remaining {
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.error-count {
+  color: #d32f2f;
+}
+
+.hints-remaining {
+  color: #1976d2;
+}
+
+.message {
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 18px;
+  width: 100%;
+  max-width: 450px;
+}
+
+.success-message {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+
+.fail-message {
+  background-color: #f2dede;
+  color: #a94442;
+  border: 1px solid #ebccd1;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 0;
+}
+
+.start-screen h2 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.difficulty-buttons button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.difficulty-buttons button:hover {
+  background-color: #45a049;
+}
+
+.new-game-button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.new-game-button:hover {
+  background-color: #0b7dda;
+}
+
+@media (max-width: 600px) {
+  .App {
+    padding: 10px;
+  }
+  
+  .number-pad button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+  
+  .cell {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  
+  .game-info {
+    font-size: 14px;
+  }
+}
