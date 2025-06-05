@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sudoku OG Image Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+    
+    .container {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+    }
+    
+    #canvas {
+      border: 1px solid #ccc;
+    }
+    
+    .instructions {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <canvas id="canvas" width="1200" height="630"></canvas>
+    <div class="instructions">
+      <h2>스도쿠 OG 이미지 생성기</h2>
+      <p>이 페이지는 스도쿠 게임의 오픈그래프 이미지를 생성합니다.</p>
+      <p>이미지를 저장하려면:</p>
+      <ol>
+        <li>캔버스에서 마우스 오른쪽 버튼 클릭</li>
+        <li>"이미지 저장" 또는 "다른 이름으로 이미지 저장" 선택</li>
+        <li>파일 이름을 "sudoku-og-image.png"로 저장</li>
+        <li>저장된 이미지를 public/images 폴더에 복사</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      // 배경
+      ctx.fillStyle = '#4A90E2';
+      ctx.fillRect(0, 0, 1200, 630);
+      
+      // 스도쿠 그리드 배경
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.roundRect(150, 115, 400, 400, 10);
+      ctx.fill();
+      
+      // 스도쿠 그리드 라인
+      // 수직선
+      drawLine(ctx, 150, 115, 150, 515, 4);
+      drawLine(ctx, 194, 115, 194, 515, 1);
+      drawLine(ctx, 238, 115, 238, 515, 1);
+      drawLine(ctx, 282, 115, 282, 515, 4);
+      drawLine(ctx, 326, 115, 326, 515, 1);
+      drawLine(ctx, 370, 115, 370, 515, 1);
+      drawLine(ctx, 414, 115, 414, 515, 4);
+      drawLine(ctx, 458, 115, 458, 515, 1);
+      drawLine(ctx, 502, 115, 502, 515, 1);
+      drawLine(ctx, 550, 115, 550, 515, 4);
+      
+      // 수평선
+      drawLine(ctx, 150, 115, 550, 115, 4);
+      drawLine(ctx, 150, 159, 550, 159, 1);
+      drawLine(ctx, 150, 203, 550, 203, 1);
+      drawLine(ctx, 150, 247, 550, 247, 4);
+      drawLine(ctx, 150, 291, 550, 291, 1);
+      drawLine(ctx, 150, 335, 550, 335, 1);
+      drawLine(ctx, 150, 379, 550, 379, 4);
+      drawLine(ctx, 150, 423, 550, 423, 1);
+      drawLine(ctx, 150, 467, 550, 467, 1);
+      drawLine(ctx, 150, 515, 550, 515, 4);
+      
+      // 샘플 숫자
+      ctx.fillStyle = '#000000';
+      ctx.font = 'bold 28px Arial';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      
+      drawNumber(ctx, 172, 145, '5');
+      drawNumber(ctx, 216, 145, '3');
+      drawNumber(ctx, 304, 145, '7');
+      drawNumber(ctx, 172, 189, '6');
+      drawNumber(ctx, 348, 189, '9');
+      drawNumber(ctx, 436, 189, '5');
+      drawNumber(ctx, 216, 233, '9');
+      drawNumber(ctx, 260, 233, '8');
+      drawNumber(ctx, 392, 233, '6');
+      drawNumber(ctx, 216, 277, '8');
+      drawNumber(ctx, 348, 277, '6');
+      drawNumber(ctx, 436, 277, '3');
+      drawNumber(ctx, 172, 321, '4');
+      drawNumber(ctx, 304, 321, '8');
+      drawNumber(ctx, 392, 321, '3');
+      drawNumber(ctx, 480, 321, '1');
+      drawNumber(ctx, 172, 365, '7');
+      drawNumber(ctx, 304, 365, '2');
+      drawNumber(ctx, 392, 365, '6');
+      drawNumber(ctx, 260, 409, '6');
+      drawNumber(ctx, 392, 409, '2');
+      drawNumber(ctx, 480, 409, '8');
+      drawNumber(ctx, 304, 453, '4');
+      drawNumber(ctx, 392, 453, '1');
+      drawNumber(ctx, 480, 453, '9');
+      drawNumber(ctx, 216, 497, '8');
+      drawNumber(ctx, 348, 497, '7');
+      drawNumber(ctx, 436, 497, '9');
+      
+      // 텍스트 영역
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = 'bold 72px Arial';
+      ctx.textAlign = 'left';
+      ctx.fillText('스도쿠 게임', 650, 200);
+      
+      ctx.font = 'bold 48px Arial';
+      ctx.fillText('Sudoku Game', 650, 280);
+      
+      // 특징 목록
+      ctx.font = '32px Arial';
+      ctx.fillText('✓ 3가지 난이도', 650, 350);
+      ctx.fillText('✓ 힌트 시스템', 650, 400);
+      ctx.fillText('✓ 메모 기능', 650, 450);
+      ctx.fillText('✓ 타이머 기능', 650, 500);
+      
+      // 기술 스택
+      ctx.font = '24px Arial';
+      ctx.fillText('React + TypeScript', 1000, 580);
+    });
+    
+    function drawLine(ctx, x1, y1, x2, y2, width) {
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.lineWidth = width;
+      ctx.stroke();
+    }
+    
+    function drawNumber(ctx, x, y, number) {
+      ctx.fillText(number, x, y);
+    }
+  </script>
+</body>
+</html>
