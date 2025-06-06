@@ -1,0 +1,177 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-color, white);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.load-game-modal h2,
+.load-game-modal h3 {
+  color: var(--text-color, #333);
+  margin-top: 0;
+}
+
+.load-game-modal h2 {
+  border-bottom: 1px solid var(--border-color, #eee);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.auto-save-section {
+  background-color: var(--highlight-bg-color, #e3f2fd);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.auto-save-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.saved-games-list {
+  margin-bottom: 20px;
+}
+
+.saved-games-list h3 {
+  margin-bottom: 15px;
+}
+
+.no-games-message {
+  color: var(--secondary-text-color, #666);
+  font-style: italic;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.saved-game-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid var(--border-color, #eee);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  background-color: var(--item-bg-color, #f9f9f9);
+}
+
+.saved-game-item:hover {
+  background-color: var(--item-hover-bg-color, #f0f0f0);
+}
+
+.game-info {
+  flex: 1;
+}
+
+.game-info h4 {
+  margin: 0 0 5px;
+  color: var(--text-color, #333);
+}
+
+.game-info p {
+  margin: 3px 0;
+  color: var(--secondary-text-color, #666);
+  font-size: 14px;
+}
+
+.game-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.load-button,
+.delete-button,
+.close-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.load-button {
+  background-color: var(--primary-button-bg, #4a90e2);
+  color: var(--primary-button-text, white);
+}
+
+.delete-button {
+  background-color: var(--delete-button-bg, #f5f5f5);
+  color: var(--delete-button-text, #333);
+}
+
+.delete-button.confirm {
+  background-color: var(--delete-confirm-bg, #e53935);
+  color: var(--delete-confirm-text, white);
+}
+
+.close-button {
+  background-color: var(--secondary-button-bg, #f5f5f5);
+  color: var(--secondary-button-text, #333);
+}
+
+.load-button:hover {
+  background-color: var(--primary-button-hover-bg, #357abd);
+}
+
+.delete-button:hover {
+  background-color: var(--delete-button-hover-bg, #e0e0e0);
+}
+
+.delete-button.confirm:hover {
+  background-color: var(--delete-confirm-hover-bg, #d32f2f);
+}
+
+.close-button:hover {
+  background-color: var(--secondary-button-hover-bg, #e0e0e0);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .load-game-modal {
+    --bg-color: #2d2d2d;
+    --text-color: #e0e0e0;
+    --secondary-text-color: #aaa;
+    --border-color: #444;
+    --highlight-bg-color: #1a3f5f;
+    --item-bg-color: #3d3d3d;
+    --item-hover-bg-color: #4d4d4d;
+    --primary-button-bg: #3a7bc8;
+    --primary-button-hover-bg: #2a6db8;
+    --primary-button-text: white;
+    --delete-button-bg: #444;
+    --delete-button-text: #e0e0e0;
+    --delete-button-hover-bg: #555;
+    --delete-confirm-bg: #c62828;
+    --delete-confirm-hover-bg: #b71c1c;
+    --delete-confirm-text: white;
+    --secondary-button-bg: #444;
+    --secondary-button-text: #e0e0e0;
+    --secondary-button-hover-bg: #555;
+  }
+}

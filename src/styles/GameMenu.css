@@ -1,0 +1,77 @@
+.game-menu {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.menu-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.menu-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.menu-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.new-game-button {
+  background-color: var(--new-game-button-bg, #4caf50);
+  color: var(--new-game-button-text, white);
+}
+
+.new-game-button:hover:not(:disabled) {
+  background-color: var(--new-game-button-hover-bg, #43a047);
+}
+
+.save-button {
+  background-color: var(--save-button-bg, #4a90e2);
+  color: var(--save-button-text, white);
+}
+
+.save-button:hover:not(:disabled) {
+  background-color: var(--save-button-hover-bg, #357abd);
+}
+
+.load-button {
+  background-color: var(--load-button-bg, #ff9800);
+  color: var(--load-button-text, white);
+}
+
+.load-button:hover:not(:disabled) {
+  background-color: var(--load-button-hover-bg, #f57c00);
+}
+
+.menu-button:disabled {
+  background-color: var(--disabled-button-bg, #cccccc);
+  color: var(--disabled-button-text, #666666);
+  cursor: not-allowed;
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .game-menu {
+    --new-game-button-bg: #388e3c;
+    --new-game-button-hover-bg: #2e7d32;
+    --new-game-button-text: white;
+    
+    --save-button-bg: #3a7bc8;
+    --save-button-hover-bg: #2a6db8;
+    --save-button-text: white;
+    
+    --load-button-bg: #f57c00;
+    --load-button-hover-bg: #ef6c00;
+    --load-button-text: white;
+    
+    --disabled-button-bg: #444444;
+    --disabled-button-text: #999999;
+  }
+}
