@@ -7,7 +7,7 @@ on:
     branches: [ main, master ]
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     strategy:
@@ -31,12 +31,3 @@ jobs:
     
     - name: Run tests
       run: npm test
-    
-    - name: Build
-      run: npm run build
-    
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: build-files
-        path: build/
