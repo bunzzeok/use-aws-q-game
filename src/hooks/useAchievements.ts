@@ -21,6 +21,9 @@ export const useAchievements = (statistics: GameStatistics) => {
   // 업적 알림 표시 상태
   const [showAchievementNotification, setShowAchievementNotification] = useState<boolean>(false);
   
+  // 업적 달성 모달 표시 상태
+  const [showAchievementModal, setShowAchievementModal] = useState<boolean>(false);
+  
   // 현재 표시 중인 업적 알림
   const [currentNotification, setCurrentNotification] = useState<Achievement | null>(null);
   
@@ -41,12 +44,18 @@ export const useAchievements = (statistics: GameStatistics) => {
     if (result.newlyUnlocked.length > 0) {
       setNewlyUnlocked(result.newlyUnlocked);
       setNotificationQueue(prev => [...prev, ...result.newlyUnlocked]);
+      
+      // 새로운 업적 달성 시 모달 표시
+      if (result.newlyUnlocked.length > 0) {
+        setCurrentNotification(result.newlyUnlocked[0]);
+        setShowAchievementModal(true);
+      }
     }
   }, [statistics]);
 
   // 알림 대기열 처리
   useEffect(() => {
-    if (notificationQueue.length > 0 && !showAchievementNotification) {
+    if (notificationQueue.length > 0 && !showAchievementNotification && !showAchievementModal) {
       // 대기열에서 첫 번째 업적 가져오기
       const nextNotification = notificationQueue[0];
       setCurrentNotification(nextNotification);
@@ -63,7 +72,7 @@ export const useAchievements = (statistics: GameStatistics) => {
       
       return () => clearTimeout(timer);
     }
-  }, [notificationQueue, showAchievementNotification]);
+  }, [notificationQueue, showAchievementNotification, showAchievementModal]);
 
   // 업적 초기화
   const resetAchievements = useCallback(() => {
@@ -85,6 +94,7 @@ export const useAchievements = (statistics: GameStatistics) => {
   // 업적 알림 닫기
   const handleCloseNotification = useCallback(() => {
     setShowAchievementNotification(false);
+    setShowAchievementModal(false);
     setCurrentNotification(null);
   }, []);
 
@@ -102,6 +112,7 @@ export const useAchievements = (statistics: GameStatistics) => {
     newlyUnlocked,
     showAchievementsModal,
     showAchievementNotification,
+    showAchievementModal,
     currentNotification,
     totalPoints,
     unlockedCount,

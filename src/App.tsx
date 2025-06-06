@@ -7,6 +7,8 @@ import AutoSaveModal from './components/AutoSaveModal';
 import SettingsModal from './components/SettingsModal';
 import StatisticsModal from './components/StatisticsModal';
 import AchievementsModal from './components/AchievementsModal';
+import AchievementNotification from './components/AchievementNotification';
+import AchievementModal from './components/AchievementModal';
 import { useGameState } from './hooks/useGameState';
 import { useGameActions } from './hooks/useGameActions';
 import { useGameStorage } from './hooks/useGameStorage';
@@ -121,7 +123,8 @@ const App: React.FC = () => {
     resetAchievements,
     handleShowAchievementsModal,
     handleCloseAchievementsModal,
-    handleCloseNotification
+    handleCloseNotification,
+    showAchievementModal
   } = useAchievements(statistics);
 
   // 게임 완료 또는 실패 시 통계 업데이트
@@ -233,22 +236,18 @@ const App: React.FC = () => {
       
       {/* 업적 알림 */}
       {showAchievementNotification && currentNotification && (
-        <div className="achievement-notification">
-          <div className="achievement-notification-content">
-            <div className="achievement-notification-icon">{currentNotification.icon}</div>
-            <div className="achievement-notification-text">
-              <h3>업적 달성!</h3>
-              <h4>{currentNotification.title}</h4>
-              <p>{currentNotification.description}</p>
-            </div>
-            <button 
-              className="achievement-notification-close" 
-              onClick={handleCloseNotification}
-            >
-              &times;
-            </button>
-          </div>
-        </div>
+        <AchievementNotification 
+          achievement={currentNotification}
+          onClose={handleCloseNotification}
+        />
+      )}
+      
+      {/* 업적 달성 모달 */}
+      {showAchievementModal && currentNotification && (
+        <AchievementModal
+          achievement={currentNotification}
+          onClose={handleCloseNotification}
+        />
       )}
     </div>
   );

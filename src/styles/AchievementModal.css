@@ -1,0 +1,127 @@
+.achievement-modal {
+  max-width: 400px;
+  width: 95%;
+  padding: 16px;
+  text-align: center;
+}
+
+.achievement-modal h2 {
+  color: var(--success-color);
+  margin-bottom: 16px;
+}
+
+.achievement-modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.achievement-modal-icon {
+  font-size: 60px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.achievement-modal-details {
+  width: 100%;
+}
+
+.achievement-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  color: var(--text-color);
+}
+
+.achievement-modal-description {
+  font-size: 14px;
+  color: var(--secondary-text-color);
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.achievement-modal-info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.achievement-modal-points,
+.achievement-modal-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.points-label,
+.date-label {
+  font-size: 12px;
+  color: var(--secondary-text-color);
+  margin-bottom: 4px;
+}
+
+.points-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.date-value {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-actions .modal-button {
+  min-width: 120px;
+}
+
+@media (max-width: 375px) {
+  .achievement-modal {
+    padding: 12px;
+  }
+  
+  .achievement-modal-content {
+    padding: 12px;
+  }
+  
+  .achievement-modal-icon {
+    font-size: 50px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 12px;
+  }
+  
+  .achievement-modal-title {
+    font-size: 18px;
+  }
+  
+  .achievement-modal-description {
+    font-size: 13px;
+  }
+}
