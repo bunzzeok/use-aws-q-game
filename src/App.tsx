@@ -276,7 +276,6 @@ const App: React.FC = () => {
     // 자동 메모 활성화 상태라면 지운 셀에 가능한 숫자 계산
     let updatedGrid = newGrid;
     if (autoNotesEnabled) {
-      const valueGrid = newGrid.map(r => r.map(c => c.value));
       const possibleNumbers: number[] = [];
       
       for (let num = 1; num <= 9; num++) {
