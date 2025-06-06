@@ -1,0 +1,93 @@
+.auto-save-settings {
+  background-color: var(--secondary-bg-color, #f5f5f5);
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.auto-save-settings h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--text-color, #333);
+  font-size: 16px;
+  border-bottom: 1px solid var(--border-color, #ddd);
+  padding-bottom: 8px;
+}
+
+.setting-row {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.setting-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color, #333);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.setting-label input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.setting-label select {
+  margin-left: 8px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #ddd);
+  background-color: var(--input-bg-color, white);
+  color: var(--text-color, #333);
+  cursor: pointer;
+}
+
+.setting-label select:disabled {
+  background-color: var(--disabled-bg-color, #eee);
+  cursor: not-allowed;
+}
+
+.save-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color, #ddd);
+}
+
+.last-save-time {
+  font-size: 13px;
+  color: var(--secondary-text-color, #666);
+  font-style: italic;
+}
+
+.save-now-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--primary-button-bg, #4a90e2);
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.save-now-button:hover {
+  background-color: var(--primary-button-hover-bg, #357abd);
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .auto-save-settings {
+    --secondary-bg-color: #333;
+    --text-color: #e0e0e0;
+    --border-color: #444;
+    --input-bg-color: #444;
+    --disabled-bg-color: #2a2a2a;
+    --secondary-text-color: #aaa;
+    --primary-button-bg: #3a7bc8;
+    --primary-button-hover-bg: #2a6db8;
+  }
+}

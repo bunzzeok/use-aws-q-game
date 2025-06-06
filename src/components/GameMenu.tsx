@@ -5,6 +5,7 @@ interface GameMenuProps {
   onSaveGame: () => void;
   onLoadGame: () => void;
   onNewGame: () => void;
+  onSettings: () => void;
   isGameStarted: boolean;
   isGameOver: boolean;
 }
@@ -16,6 +17,7 @@ const GameMenu: React.FC<GameMenuProps> = ({
   onSaveGame,
   onLoadGame,
   onNewGame,
+  onSettings,
   isGameStarted,
   isGameOver
 }) => {
@@ -46,6 +48,14 @@ const GameMenu: React.FC<GameMenuProps> = ({
         title="저장된 게임 불러오기"
       >
         불러오기
+      </button>
+      
+      <button 
+        className="menu-button settings-button"
+        onClick={onSettings}
+        title="게임 설정"
+      >
+        설정
       </button>
     </div>
   );

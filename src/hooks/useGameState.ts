@@ -55,6 +55,7 @@ export const useGameState = () => {
       if (timerInterval) clearInterval(timerInterval);
       if (autoSaveInterval) clearInterval(autoSaveInterval);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 자동 저장된 게임 확인

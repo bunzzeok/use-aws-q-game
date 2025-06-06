@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ThemeToggle from './components/ThemeToggle';
 import GameMenu from './components/GameMenu';
 import GameBoard from './components/GameBoard';
 import SaveGameModal from './components/SaveGameModal';
 import LoadGameModal from './components/LoadGameModal';
 import AutoSaveModal from './components/AutoSaveModal';
+import SettingsModal from './components/SettingsModal';
 import { useGameState } from './hooks/useGameState';
 import { useGameActions } from './hooks/useGameActions';
 import { useGameStorage } from './hooks/useGameStorage';
+import { useAutoSave } from './hooks/useAutoSave';
 import { gameHistory } from './utils/history/gameHistory';
 import './styles/App.css';
 
 const App: React.FC = () => {
+  // 설정 모달 상태
+  const [showSettingsModal, setShowSettingsModal] = useState<boolean>(false);
+
   // 게임 상태 관리 훅
   const {
     gameState,
     setGameState,
     isNotesMode,
-    setIsNotesMode,
     timerInterval,
     setTimerInterval,
     gameStarted,
@@ -56,6 +60,19 @@ const App: React.FC = () => {
     setTimerInterval
   );
 
+  // 자동 저장 관리 훅
+  const {
+    autoSaveSettings,
+    updateAutoSaveSettings,
+    performAutoSave,
+    lastSaveTime
+  } = useAutoSave(
+    gameState,
+    gameStarted,
+    autoNotesEnabled,
+    setShowAutoSaveModal
+  );
+
   // 게임 저장 및 불러오기 관리 훅
   const {
     handleShowSaveModal,
@@ -90,6 +107,7 @@ const App: React.FC = () => {
         onSaveGame={handleShowSaveModal}
         onLoadGame={handleShowLoadModal}
         onNewGame={() => setGameStarted(false)}
+        onSettings={() => setShowSettingsModal(true)}
         isGameStarted={gameStarted}
         isGameOver={gameState.isComplete || gameState.isFailed}
       />
@@ -146,6 +164,17 @@ const App: React.FC = () => {
             handleDeleteGame('auto');
             setShowAutoSaveModal(false);
           }}
+        />
+      )}
+      
+      {/* 설정 모달 */}
+      {showSettingsModal && (
+        <SettingsModal
+          onClose={() => setShowSettingsModal(false)}
+          autoSaveSettings={autoSaveSettings}
+          onUpdateAutoSaveSettings={updateAutoSaveSettings}
+          lastSaveTime={lastSaveTime}
+          onSaveNow={performAutoSave}
         />
       )}
     </div>
