@@ -8,6 +8,7 @@ jest.mock('./components/SaveGameModal', () => () => <div data-testid="save-game-
 jest.mock('./components/LoadGameModal', () => () => <div data-testid="load-game-modal" />);
 jest.mock('./components/AutoSaveModal', () => () => <div data-testid="auto-save-modal" />);
 jest.mock('./components/SettingsModal', () => () => <div data-testid="settings-modal" />);
+jest.mock('./components/StatisticsModal', () => () => <div data-testid="statistics-modal" />);
 jest.mock('./components/GameMenu', () => () => <div data-testid="game-menu" />);
 jest.mock('./components/GameBoard', () => () => <div data-testid="game-board" />);
 jest.mock('./components/ThemeToggle', () => () => <div data-testid="theme-toggle" />);
@@ -74,6 +75,27 @@ jest.mock('./hooks/useAutoSave', () => ({
     updateAutoSaveSettings: jest.fn(),
     performAutoSave: jest.fn(),
     lastSaveTime: null
+  })
+}));
+
+jest.mock('./hooks/useGameStatistics', () => ({
+  useGameStatistics: () => ({
+    statistics: {
+      totalGames: 0,
+      completedGames: 0,
+      bestTimes: {},
+      averageTimes: {},
+      winRate: 0,
+      hintsUsed: 0,
+      mistakesMade: 0,
+      lastPlayed: 0,
+      streakDays: 0
+    },
+    showStatisticsModal: false,
+    recordGameResult: jest.fn(),
+    resetStatistics: jest.fn(),
+    handleShowStatisticsModal: jest.fn(),
+    handleCloseStatisticsModal: jest.fn()
   })
 }));
 

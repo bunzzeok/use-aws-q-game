@@ -60,6 +60,15 @@
   background-color: var(--settings-button-hover-bg, #7b1fa2);
 }
 
+.statistics-button {
+  background-color: var(--statistics-button-bg, #00bcd4);
+  color: var(--statistics-button-text, white);
+}
+
+.statistics-button:hover:not(:disabled) {
+  background-color: var(--statistics-button-hover-bg, #00acc1);
+}
+
 .menu-button:disabled {
   background-color: var(--disabled-button-bg, #cccccc);
   color: var(--disabled-button-text, #666666);

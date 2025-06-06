@@ -412,3 +412,53 @@
 2. 게임 통계 기능 구현 (완료 시간, 최고 기록 등)
 3. 성능 최적화
 4. 추가 테스트 코드 작성
+## 2025-06-06 13:15 - 게임 통계 기능 구현 계획
+
+### 수행 작업
+1. **게임 통계 기능 분석**
+   - 스도쿠 게임에서 유용한 통계 지표 조사
+   - 통계 데이터 저장 방식 설계
+   - 통계 표시 UI 계획
+
+### 구현 계획
+- **통계 데이터 구조**:
+  ```typescript
+  interface GameStatistics {
+    totalGames: number;
+    completedGames: number;
+    bestTimes: {
+      [Difficulty.EASY]: number | null;
+      [Difficulty.MEDIUM]: number | null;
+      [Difficulty.HARD]: number | null;
+    };
+    averageTimes: {
+      [Difficulty.EASY]: number | null;
+      [Difficulty.MEDIUM]: number | null;
+      [Difficulty.HARD]: number | null;
+    };
+    winRate: number;
+    hintsUsed: number;
+    mistakesMade: number;
+    lastPlayed: number;
+    streakDays: number;
+  }
+  ```
+
+- **주요 기능**:
+  1. 게임 완료 시 통계 데이터 업데이트
+  2. 난이도별 최고 기록 및 평균 시간 추적
+  3. 연속 플레이 일수(스트릭) 계산
+  4. 승률 및 실수율 계산
+  5. 통계 데이터 시각화
+
+- **사용자 인터페이스**:
+  1. 통계 모달 구현
+  2. 난이도별 최고 기록 표시
+  3. 그래프를 통한 진행 상황 시각화
+  4. 업적 시스템 구현
+
+### 다음 단계
+1. 통계 관리 유틸리티 구현
+2. 통계 표시 컴포넌트 개발
+3. 게임 완료 시 통계 업데이트 로직 구현
+4. 테스트 코드 작성

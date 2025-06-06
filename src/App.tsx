@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ThemeToggle from './components/ThemeToggle';
 import GameMenu from './components/GameMenu';
 import GameBoard from './components/GameBoard';
@@ -6,10 +6,12 @@ import SaveGameModal from './components/SaveGameModal';
 import LoadGameModal from './components/LoadGameModal';
 import AutoSaveModal from './components/AutoSaveModal';
 import SettingsModal from './components/SettingsModal';
+import StatisticsModal from './components/StatisticsModal';
 import { useGameState } from './hooks/useGameState';
 import { useGameActions } from './hooks/useGameActions';
 import { useGameStorage } from './hooks/useGameStorage';
 import { useAutoSave } from './hooks/useAutoSave';
+import { useGameStatistics } from './hooks/useGameStatistics';
 import { gameHistory } from './utils/history/gameHistory';
 import './styles/App.css';
 
@@ -96,6 +98,23 @@ const App: React.FC = () => {
     setAutoSaveInterval
   );
 
+  // 게임 통계 관리 훅
+  const {
+    statistics,
+    showStatisticsModal,
+    recordGameResult,
+    resetStatistics,
+    handleShowStatisticsModal,
+    handleCloseStatisticsModal
+  } = useGameStatistics();
+
+  // 게임 완료 또는 실패 시 통계 업데이트
+  useEffect(() => {
+    if ((gameState.isComplete || gameState.isFailed) && gameStarted) {
+      recordGameResult(gameState, autoNotesEnabled);
+    }
+  }, [gameState.isComplete, gameState.isFailed, gameStarted, gameState, autoNotesEnabled, recordGameResult]);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -108,6 +127,7 @@ const App: React.FC = () => {
         onLoadGame={handleShowLoadModal}
         onNewGame={() => setGameStarted(false)}
         onSettings={() => setShowSettingsModal(true)}
+        onStatistics={handleShowStatisticsModal}
         isGameStarted={gameStarted}
         isGameOver={gameState.isComplete || gameState.isFailed}
       />
@@ -175,6 +195,15 @@ const App: React.FC = () => {
           onUpdateAutoSaveSettings={updateAutoSaveSettings}
           lastSaveTime={lastSaveTime}
           onSaveNow={performAutoSave}
+        />
+      )}
+      
+      {/* 통계 모달 */}
+      {showStatisticsModal && (
+        <StatisticsModal
+          onClose={handleCloseStatisticsModal}
+          statistics={statistics}
+          onResetStatistics={resetStatistics}
         />
       )}
     </div>
