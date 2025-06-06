@@ -13,7 +13,7 @@
   margin-bottom: 6px;
   font-weight: 500;
   color: var(--text-color);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .form-group input {
@@ -21,7 +21,7 @@
   padding: 10px 12px;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 15px;
   background-color: var(--input-bg);
   color: var(--input-text);
   transition: all 0.3s ease;
@@ -37,7 +37,7 @@
 .error-message {
   color: var(--error-count-color);
   margin: 8px 0;
-  font-size: 13px;
+  font-size: 14px;
   animation: shake 0.4s ease-in-out;
 }
 
@@ -53,14 +53,26 @@
   padding: 12px;
   margin-bottom: 16px;
   box-shadow: 0 1px 4px var(--shadow-color);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+  align-items: center;
 }
 
 .game-info p {
-  margin: 6px 0;
+  margin: 0;
   color: var(--text-color);
-  font-size: 13px;
+  font-size: 15px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.game-info p:nth-child(odd) {
+  font-weight: 500;
+}
+
+.game-info p:nth-child(even) {
+  color: var(--secondary-text-color);
 }
 
 .modal-actions {
@@ -71,6 +83,6 @@
 }
 
 .modal-actions button {
-  padding: 8px 16px;
-  font-size: 14px;
+  padding: 10px 16px;
+  font-size: 15px;
 }
