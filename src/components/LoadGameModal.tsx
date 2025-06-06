@@ -100,19 +100,15 @@ const LoadGameModal: React.FC<LoadGameModalProps> = ({
                     <h4>{game.name}</h4>
                     <div className="game-details">
                       <div className="game-detail-item">
-                        <span className="game-detail-label">난이도</span>
+                        <span className="game-detail-label">난이도:</span>
                         <span className="game-detail-value">{getDifficultyText(game.difficulty)}</span>
                       </div>
                       <div className="game-detail-item">
-                        <span className="game-detail-label">저장 시간</span>
-                        <span className="game-detail-value">{new Date(game.timestamp).toLocaleString()}</span>
-                      </div>
-                      <div className="game-detail-item">
-                        <span className="game-detail-label">진행 시간</span>
+                        <span className="game-detail-label">진행 시간:</span>
                         <span className="game-detail-value">{formatTime(game.timer)}</span>
                       </div>
                       <div className="game-detail-item">
-                        <span className="game-detail-label">완료율</span>
+                        <span className="game-detail-label">완료율:</span>
                         <span className="game-detail-value">{game.completionPercentage}%</span>
                       </div>
                     </div>
