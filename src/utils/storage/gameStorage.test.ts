@@ -1,5 +1,5 @@
 import { GameStorage, SavedGame } from './gameStorage';
-import { CellState, Difficulty, GameState } from '../../types';
+import { CellState, Difficulty, GameState } from '../../types/index';
 
 // localStorage 모킹
 const localStorageMock = (() => {
@@ -44,6 +44,7 @@ describe('GameStorage', () => {
     
     return {
       grid,
+      initialGrid: grid.map(row => row.map(cell => ({ ...cell }))),
       solution: Array(9).fill(null).map(() => Array(9).fill(5)),
       selectedCell: null,
       difficulty: Difficulty.MEDIUM,

@@ -1,4 +1,4 @@
-import { GameState } from '../types';
+import { GameState } from '../types/index';
 import { GameStorage } from '../utils/storage/gameStorage';
 
 /**
@@ -49,6 +49,7 @@ export const useGameStorage = (
     // 저장된 게임 상태 복원
     const loadedGameState: GameState = {
       grid: savedGame.grid,
+      initialGrid: savedGame.initialGrid,
       solution: savedGame.solution,
       selectedCell: null,
       difficulty: savedGame.difficulty,

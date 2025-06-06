@@ -1,70 +1,58 @@
 import React from 'react';
 import Cell from './Cell';
-import { CellState } from '../types';
+import { CellState } from '../types/index';
 import '../styles/Grid.css';
 
 interface GridProps {
   grid: CellState[][];
-  selectedCell: [number, number] | null;
+  selectedCell: { row: number; col: number } | null;
   onCellClick: (row: number, col: number) => void;
+  initialGrid: CellState[][];
 }
 
-const Grid: React.FC<GridProps> = ({ grid, selectedCell, onCellClick }) => {
-  // 선택된 셀과 같은 숫자를 가진 셀 하이라이트
-  const isSameNumber = (row: number, col: number): boolean => {
+const Grid: React.FC<GridProps> = ({ grid, selectedCell, onCellClick, initialGrid }) => {
+  const isInSameRow = (row: number) => selectedCell && selectedCell.row === row;
+  const isInSameCol = (col: number) => selectedCell && selectedCell.col === col;
+  const isInSameBox = (row: number, col: number) => {
     if (!selectedCell) return false;
-    
-    const [selectedRow, selectedCol] = selectedCell;
-    const selectedValue = grid[selectedRow][selectedCol].value;
-    
-    // 선택된 셀에 값이 없으면 하이라이트 없음
-    if (selectedValue === null) return false;
-    
-    // 현재 셀의 값이 선택된 셀의 값과 같은지 확인
-    return grid[row][col].value === selectedValue;
+    const boxRow = Math.floor(selectedCell.row / 3);
+    const boxCol = Math.floor(selectedCell.col / 3);
+    return Math.floor(row / 3) === boxRow && Math.floor(col / 3) === boxCol;
   };
-  
-  // 선택된 셀과 같은 행, 열, 또는 3x3 박스에 있는 셀 하이라이트
-  const isSamePosition = (row: number, col: number): boolean => {
-    if (!selectedCell) return false;
-    
-    const [selectedRow, selectedCol] = selectedCell;
-    
-    // 같은 행
-    if (row === selectedRow) return true;
-    
-    // 같은 열
-    if (col === selectedCol) return true;
-    
-    // 같은 3x3 박스
-    const boxRow = Math.floor(selectedRow / 3);
-    const boxCol = Math.floor(selectedCol / 3);
-    const currentBoxRow = Math.floor(row / 3);
-    const currentBoxCol = Math.floor(col / 3);
-    
-    return boxRow === currentBoxRow && boxCol === currentBoxCol;
+  const isSameValue = (row: number, col: number) => {
+    if (!selectedCell || !grid[selectedCell.row] || !grid[selectedCell.row][selectedCell.col]) return false;
+    const selectedValue = grid[selectedCell.row][selectedCell.col].value;
+    return selectedValue !== 0 && selectedValue !== null && grid[row][col].value === selectedValue;
   };
 
   return (
     <div className="sudoku-grid">
       {grid.map((row, rowIndex) => (
-        <div key={`row-${rowIndex}`} className="grid-row">
-          {row.map((cellState, colIndex) => (
-            <Cell
-              key={`cell-${rowIndex}-${colIndex}`}
-              cellState={cellState}
-              rowIndex={rowIndex}
-              colIndex={colIndex}
-              isSelected={
-                selectedCell !== null && 
-                selectedCell[0] === rowIndex && 
-                selectedCell[1] === colIndex
-              }
-              sameNumber={isSameNumber(rowIndex, colIndex)}
-              samePosition={isSamePosition(rowIndex, colIndex)}
-              onCellClick={onCellClick}
-            />
-          ))}
+        <div key={rowIndex} className="grid-row">
+          {row.map((cell, colIndex) => {
+            const isSelected = selectedCell?.row === rowIndex && selectedCell?.col === colIndex;
+            const isHighlighted = 
+              isInSameRow(rowIndex) || 
+              isInSameCol(colIndex) || 
+              isInSameBox(rowIndex, colIndex) ||
+              isSameValue(rowIndex, colIndex);
+            const isInitial = initialGrid && initialGrid[rowIndex] && initialGrid[rowIndex][colIndex] ? 
+              initialGrid[rowIndex][colIndex].isInitial : false;
+            const isInvalid = cell.isInvalid || false;
+
+            return (
+              <Cell
+                key={colIndex}
+                value={cell.value}
+                notes={cell.notes}
+                isSelected={isSelected}
+                isHighlighted={isHighlighted}
+                isInitial={isInitial}
+                isInvalid={isInvalid}
+                onClick={() => onCellClick(rowIndex, colIndex)}
+              />
+            );
+          })}
         </div>
       ))}
     </div>

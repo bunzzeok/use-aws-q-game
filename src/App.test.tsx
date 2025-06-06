@@ -9,16 +9,30 @@ jest.mock('./components/LoadGameModal', () => () => <div data-testid="load-game-
 jest.mock('./components/AutoSaveModal', () => () => <div data-testid="auto-save-modal" />);
 jest.mock('./components/SettingsModal', () => () => <div data-testid="settings-modal" />);
 jest.mock('./components/StatisticsModal', () => () => <div data-testid="statistics-modal" />);
-jest.mock('./components/GameMenu', () => () => <div data-testid="game-menu" />);
+jest.mock('./components/AchievementsModal', () => () => <div data-testid="achievements-modal" />);
 jest.mock('./components/GameBoard', () => () => <div data-testid="game-board" />);
 jest.mock('./components/ThemeToggle', () => () => <div data-testid="theme-toggle" />);
+jest.mock('./components/Header', () => (props: any) => (
+  <header data-testid="header">
+    <h1>스도쿠 게임</h1>
+    <div data-testid="theme-toggle"></div>
+  </header>
+));
 
 // 커스텀 훅 모킹
 jest.mock('./hooks/useGameState', () => ({
   useGameState: () => ({
     gameState: {
       isComplete: false,
-      isFailed: false
+      isFailed: false,
+      grid: [],
+      initialGrid: [],
+      selectedCell: null,
+      timer: 0,
+      errorCount: 0,
+      hintsRemaining: 3,
+      isPaused: false,
+      difficulty: 'easy'
     },
     gameStarted: false,
     showSaveModal: false,
@@ -99,6 +113,23 @@ jest.mock('./hooks/useGameStatistics', () => ({
   })
 }));
 
+jest.mock('./hooks/useAchievements', () => ({
+  useAchievements: () => ({
+    achievements: [],
+    newlyUnlocked: [],
+    showAchievementsModal: false,
+    showAchievementNotification: false,
+    currentNotification: null,
+    totalPoints: 0,
+    unlockedCount: 0,
+    totalCount: 0,
+    resetAchievements: jest.fn(),
+    handleShowAchievementsModal: jest.fn(),
+    handleCloseAchievementsModal: jest.fn(),
+    handleCloseNotification: jest.fn()
+  })
+}));
+
 jest.mock('./utils/history/gameHistory', () => ({
   gameHistory: {
     canUndo: () => false,
@@ -116,14 +147,14 @@ test('renders sudoku game title', () => {
   expect(titleElement).toBeInTheDocument();
 });
 
-test('renders game menu component', () => {
+test('renders header component', () => {
   render(
     <ThemeProvider>
       <App />
     </ThemeProvider>
   );
-  const gameMenuElement = screen.getByTestId('game-menu');
-  expect(gameMenuElement).toBeInTheDocument();
+  const headerElement = screen.getByTestId('header');
+  expect(headerElement).toBeInTheDocument();
 });
 
 test('renders game board component', () => {

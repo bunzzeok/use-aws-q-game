@@ -1,0 +1,152 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+}
+
+.app-title {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-button {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.menu-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background-color: var(--drawer-bg);
+  box-shadow: 2px 0 8px var(--shadow-color);
+  z-index: 1000;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow-y: auto;
+}
+
+.menu-drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.drawer-title {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.close-drawer {
+  background: none;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+}
+
+.close-drawer:hover {
+  background-color: var(--hover-bg);
+}
+
+.drawer-content {
+  padding: 16px;
+}
+
+.drawer-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: background-color 0.2s;
+  text-decoration: none;
+}
+
+.drawer-menu-item:hover {
+  background-color: var(--hover-bg);
+}
+
+.drawer-menu-item.active {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color);
+}
+
+.drawer-menu-item-icon {
+  margin-right: 16px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-menu-item-text {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-overlay-bg);
+  z-index: 999;
+  display: none;
+}
+
+.drawer-overlay.open {
+  display: block;
+}

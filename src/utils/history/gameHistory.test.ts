@@ -1,5 +1,5 @@
 import { GameHistory, GameAction } from './gameHistory';
-import { CellState, GameState, Difficulty } from '../../types';
+import { CellState, GameState, Difficulty } from '../../types/index';
 
 describe('GameHistory', () => {
   let gameHistory: GameHistory;
@@ -28,8 +28,16 @@ describe('GameHistory', () => {
           notes: []
         }))
       ),
+      initialGrid: Array(9).fill(null).map(() => 
+        Array(9).fill(null).map(() => ({
+          value: null,
+          isInitial: false,
+          isValid: true,
+          notes: []
+        }))
+      ),
       solution: Array(9).fill(null).map(() => Array(9).fill(5)),
-      selectedCell: [0, 0],
+      selectedCell: { row: 0, col: 0 },
       difficulty: Difficulty.EASY,
       isComplete: false,
       isFailed: false,

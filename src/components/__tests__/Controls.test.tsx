@@ -1,183 +1,104 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Controls from '../Controls';
-import { Difficulty } from '../../types';
 
 describe('Controls Component', () => {
-  const mockOnNewGame = jest.fn();
-  const mockOnNumberClick = jest.fn();
-  const mockOnEraseClick = jest.fn();
-  const mockOnNotesToggle = jest.fn();
-  const mockOnHintClick = jest.fn();
-  
+  const defaultProps = {
+    onNumberClick: jest.fn(),
+    onEraseClick: jest.fn(),
+    onNotesToggle: jest.fn(),
+    onHintClick: jest.fn(),
+    isNotesMode: false,
+    hintsRemaining: 3,
+    usedNumbers: []
+  };
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  
-  it('renders number buttons from 1 to 9', () => {
-    render(
-      <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
-      />
-    );
+
+  test('renders number buttons from 1 to 9', () => {
+    render(<Controls {...defaultProps} />);
     
-    // 1부터 9까지의 숫자 버튼이 있는지 확인
     for (let i = 1; i <= 9; i++) {
-      expect(screen.getByText(i.toString())).toBeInTheDocument();
+      const button = screen.getByText(i.toString());
+      expect(button).toBeInTheDocument();
     }
   });
-  
-  it('calls onNumberClick when a number button is clicked', () => {
-    render(
-      <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
-      />
-    );
+
+  test('calls onNumberClick when a number button is clicked', () => {
+    render(<Controls {...defaultProps} />);
     
-    // 숫자 버튼 클릭
-    fireEvent.click(screen.getByText('5'));
-    expect(mockOnNumberClick).toHaveBeenCalledWith(5);
-  });
-  
-  it('calls onEraseClick when erase button is clicked', () => {
-    render(
-      <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
-      />
-    );
+    // 숫자 5 버튼 클릭
+    const button5 = screen.getByText('5');
+    fireEvent.click(button5);
     
-    // 지우기 버튼 클릭
-    fireEvent.click(screen.getByText(/지우기/i));
-    expect(mockOnEraseClick).toHaveBeenCalled();
+    expect(defaultProps.onNumberClick).toHaveBeenCalledWith(5);
   });
-  
-  it('calls onNotesToggle when notes button is clicked', () => {
-    render(
-      <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
-      />
-    );
+
+  test('calls onEraseClick when erase button is clicked', () => {
+    render(<Controls {...defaultProps} />);
     
-    // 메모 버튼 클릭
-    fireEvent.click(screen.getByText(/메모/i));
-    expect(mockOnNotesToggle).toHaveBeenCalled();
-  });
-  
-  it('calls onHintClick when hint button is clicked', () => {
-    render(
-      <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
-      />
-    );
+    const eraseButton = screen.getByText('지우기');
+    fireEvent.click(eraseButton);
     
-    // 힌트 버튼 클릭
-    fireEvent.click(screen.getByText(/힌트/i));
-    expect(mockOnHintClick).toHaveBeenCalled();
+    expect(defaultProps.onEraseClick).toHaveBeenCalledTimes(1);
   });
-  
-  it('disables hint button when no hints remaining', () => {
+
+  test('calls onNotesToggle when notes button is clicked', () => {
+    render(<Controls {...defaultProps} />);
+    
+    const notesButton = screen.getByText('메모');
+    fireEvent.click(notesButton);
+    
+    expect(defaultProps.onNotesToggle).toHaveBeenCalledTimes(1);
+  });
+
+  test('calls onHintClick when hint button is clicked', () => {
+    render(<Controls {...defaultProps} />);
+    
+    const hintButton = screen.getByText(/힌트/);
+    fireEvent.click(hintButton);
+    
+    expect(defaultProps.onHintClick).toHaveBeenCalledTimes(1);
+  });
+
+  test('disables hint button when no hints remaining', () => {
     render(
       <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
+        {...defaultProps}
         hintsRemaining={0}
-        isGameOver={false}
       />
     );
     
-    // 힌트 버튼이 비활성화되어 있는지 확인
-    const hintButton = screen.getByText(/힌트/i);
+    const hintButton = screen.getByText(/힌트/).closest('button');
     expect(hintButton).toBeDisabled();
   });
-  
-  it('applies active class to notes button when in notes mode', () => {
+
+  test('applies active class to notes button when in notes mode', () => {
     render(
       <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
+        {...defaultProps}
         isNotesMode={true}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={false}
       />
     );
     
-    // 메모 버튼에 active 클래스가 적용되어 있는지 확인
-    const notesButton = screen.getByText(/메모/i);
-    expect(notesButton.className).toContain('active');
+    const notesButton = screen.getByText('메모').closest('button');
+    expect(notesButton).toHaveClass('active');
   });
-  
-  it('disables all buttons when game is over', () => {
+
+  test('disables number buttons that have been used 9 times', () => {
     render(
       <Controls
-        onNewGame={mockOnNewGame}
-        onNumberClick={mockOnNumberClick}
-        onEraseClick={mockOnEraseClick}
-        onNotesToggle={mockOnNotesToggle}
-        onHintClick={mockOnHintClick}
-        isNotesMode={false}
-        timer={0}
-        hintsRemaining={3}
-        isGameOver={true}
+        {...defaultProps}
+        usedNumbers={[1, 1, 1, 1, 1, 1, 1, 1, 1]} // 숫자 1이 9번 사용됨
       />
     );
     
-    // 모든 버튼이 비활성화되어 있는지 확인
-    const numberButtons = screen.getAllByText(/[1-9]/);
-    numberButtons.forEach(button => {
-      expect(button).toBeDisabled();
-    });
+    const button1 = screen.getByText('1');
+    expect(button1).toBeDisabled();
     
-    expect(screen.getByText(/지우기/i)).toBeDisabled();
-    expect(screen.getByText(/메모/i)).toBeDisabled();
-    expect(screen.getByText(/힌트/i)).toBeDisabled();
+    const button2 = screen.getByText('2');
+    expect(button2).not.toBeDisabled();
   });
 });

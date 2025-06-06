@@ -1,17 +1,13 @@
 .theme-toggle {
-  position: absolute;
-  top: 0;
-  right: 0;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 10px;
-  font-size: 24px;
-  color: var(--header-color);
-  transition: all 0.3s ease;
+  padding: 8px;
+  color: var(--text-color);
+  transition: all 0.2s ease;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,8 +15,7 @@
 }
 
 .theme-toggle:hover {
-  background-color: var(--secondary-bg-color);
-  transform: scale(1.1);
+  background-color: var(--hover-bg);
 }
 
 .theme-toggle:active {
@@ -31,7 +26,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: rotate 0.5s ease-in-out;
+  animation: rotate 0.3s ease-in-out;
 }
 
 @keyframes rotate {

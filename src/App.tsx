@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import ThemeToggle from './components/ThemeToggle';
-import GameMenu from './components/GameMenu';
+import Header from './components/Header';
 import GameBoard from './components/GameBoard';
 import SaveGameModal from './components/SaveGameModal';
 import LoadGameModal from './components/LoadGameModal';
 import AutoSaveModal from './components/AutoSaveModal';
 import SettingsModal from './components/SettingsModal';
 import StatisticsModal from './components/StatisticsModal';
+import AchievementsModal from './components/AchievementsModal';
 import { useGameState } from './hooks/useGameState';
 import { useGameActions } from './hooks/useGameActions';
 import { useGameStorage } from './hooks/useGameStorage';
 import { useAutoSave } from './hooks/useAutoSave';
 import { useGameStatistics } from './hooks/useGameStatistics';
+import { useAchievements } from './hooks/useAchievements';
 import { gameHistory } from './utils/history/gameHistory';
 import './styles/App.css';
 
@@ -108,6 +109,21 @@ const App: React.FC = () => {
     handleCloseStatisticsModal
   } = useGameStatistics();
 
+  // 업적 관리 훅
+  const {
+    achievements,
+    showAchievementsModal,
+    showAchievementNotification,
+    currentNotification,
+    totalPoints,
+    unlockedCount,
+    totalCount,
+    resetAchievements,
+    handleShowAchievementsModal,
+    handleCloseAchievementsModal,
+    handleCloseNotification
+  } = useAchievements(statistics);
+
   // 게임 완료 또는 실패 시 통계 업데이트
   useEffect(() => {
     if ((gameState.isComplete || gameState.isFailed) && gameStarted) {
@@ -117,18 +133,13 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>스도쿠 게임</h1>
-        <ThemeToggle />
-      </header>
-      
-      <GameMenu
+      <Header
+        onNewGame={() => setGameStarted(false)}
         onSaveGame={handleShowSaveModal}
         onLoadGame={handleShowLoadModal}
-        onNewGame={() => setGameStarted(false)}
         onSettings={() => setShowSettingsModal(true)}
         onStatistics={handleShowStatisticsModal}
-        onAchievements={() => {}}
+        onAchievements={handleShowAchievementsModal}
         isGameStarted={gameStarted}
         isGameOver={gameState.isComplete || gameState.isFailed}
       />
@@ -206,6 +217,38 @@ const App: React.FC = () => {
           statistics={statistics}
           onResetStatistics={resetStatistics}
         />
+      )}
+      
+      {/* 업적 모달 */}
+      {showAchievementsModal && (
+        <AchievementsModal
+          onClose={handleCloseAchievementsModal}
+          achievements={achievements}
+          totalPoints={totalPoints}
+          unlockedCount={unlockedCount}
+          totalCount={totalCount}
+          onResetAchievements={resetAchievements}
+        />
+      )}
+      
+      {/* 업적 알림 */}
+      {showAchievementNotification && currentNotification && (
+        <div className="achievement-notification">
+          <div className="achievement-notification-content">
+            <div className="achievement-notification-icon">{currentNotification.icon}</div>
+            <div className="achievement-notification-text">
+              <h3>업적 달성!</h3>
+              <h4>{currentNotification.title}</h4>
+              <p>{currentNotification.description}</p>
+            </div>
+            <button 
+              className="achievement-notification-close" 
+              onClick={handleCloseNotification}
+            >
+              &times;
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

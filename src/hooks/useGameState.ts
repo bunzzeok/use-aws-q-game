@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CellState, Difficulty, GameState } from '../types';
+import { CellState, Difficulty, GameState } from '../types/index';
 import { generatePuzzle } from '../utils/sudokuGenerator';
 import { generateAutoNotes } from '../utils/autoNotes';
 import { gameHistory } from '../utils/history/gameHistory';
@@ -24,6 +24,7 @@ export const useGameState = () => {
   // 게임 상태
   const [gameState, setGameState] = useState<GameState>({
     grid: createEmptyGameGrid(),
+    initialGrid: createEmptyGameGrid(),
     solution: [], // 빈 솔루션 초기화
     selectedCell: null,
     difficulty: Difficulty.EASY,
@@ -115,6 +116,7 @@ export const useGameState = () => {
     
     const newGameState = {
       grid: gridWithNotes,
+      initialGrid: initialGrid,
       solution: solution,
       selectedCell: null,
       difficulty,

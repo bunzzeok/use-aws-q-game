@@ -1,4 +1,4 @@
-import { GameState } from '../types';
+import { GameState } from '../types/index';
 import { updateNotesAfterInput } from '../utils/autoNotes';
 import { gameHistory } from '../utils/history/gameHistory';
 
@@ -26,7 +26,7 @@ export const useGameActions = (
     
     setGameState(prev => ({
       ...prev,
-      selectedCell: [row, col]
+      selectedCell: { row, col }
     }));
   };
 
@@ -35,7 +35,7 @@ export const useGameActions = (
     // 게임이 시작되지 않았거나 선택된 셀이 없거나 실패/완료 상태면 아무 동작 안함
     if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
-    const [row, col] = gameState.selectedCell;
+    const { row, col } = gameState.selectedCell;
     let newGrid = [...gameState.grid];
     
     // 히스토리에 현재 상태 저장
@@ -146,7 +146,7 @@ export const useGameActions = (
     // 게임이 시작되지 않았거나 선택된 셀이 없거나 실패/완료 상태면 아무 동작 안함
     if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
-    const [row, col] = gameState.selectedCell;
+    const { row, col } = gameState.selectedCell;
     const newGrid = [...gameState.grid];
     
     // 초기 셀은 지울 수 없음
@@ -237,7 +237,7 @@ export const useGameActions = (
     // 힌트가 남아있지 않으면 아무 동작 안함
     if (gameState.hintsRemaining <= 0) return;
     
-    const [row, col] = gameState.selectedCell;
+    const { row, col } = gameState.selectedCell;
     
     // 이미 채워진 셀에는 힌트를 제공하지 않음
     if (gameState.grid[row][col].value !== null) return;

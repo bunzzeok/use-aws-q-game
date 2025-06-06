@@ -15,13 +15,15 @@ export interface CellState {
   isInitial: boolean;
   isValid: boolean;
   notes: number[];
+  isInvalid?: boolean;
 }
 
 // 게임 상태
 export interface GameState {
   grid: CellState[][];
+  initialGrid: CellState[][];
   solution: GridType; // 정답 그리드 추가
-  selectedCell: [number, number] | null;
+  selectedCell: { row: number; col: number } | null;
   difficulty: Difficulty;
   isComplete: boolean;
   isFailed: boolean; // 게임 실패 상태 추가

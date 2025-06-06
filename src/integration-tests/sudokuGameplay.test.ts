@@ -1,6 +1,6 @@
 import { generatePuzzle, solveSudoku } from '../utils/sudokuGenerator';
 import { isPuzzleComplete, isValidSudoku } from '../utils/sudokuValidator';
-import { Difficulty, GridType } from '../types';
+import { Difficulty, GridType } from '../types/index';
 
 /**
  * 통합 테스트: 스도쿠 게임 플레이 시뮬레이션

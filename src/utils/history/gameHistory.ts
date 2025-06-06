@@ -1,4 +1,4 @@
-import { CellState, GameState } from '../../types';
+import { CellState, GameState } from '../../types/index';
 
 /**
  * 게임 히스토리 관리를 위한 타입 정의

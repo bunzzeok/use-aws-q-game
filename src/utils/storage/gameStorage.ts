@@ -1,4 +1,4 @@
-import { CellState, Difficulty, GameState } from '../../types';
+import { CellState, Difficulty, GameState } from '../../types/index';
 
 /**
  * 저장된 게임 정보 인터페이스
@@ -9,6 +9,7 @@ export interface SavedGame {
   name: string;
   difficulty: Difficulty;
   grid: CellState[][];
+  initialGrid: CellState[][];
   solution: number[][];
   timer: number;
   errorCount: number;
@@ -65,6 +66,7 @@ export class GameStorage {
       name: gameName,
       difficulty: gameState.difficulty,
       grid: JSON.parse(JSON.stringify(gameState.grid)), // 깊은 복사
+      initialGrid: JSON.parse(JSON.stringify(gameState.initialGrid)), // 깊은 복사
       solution: JSON.parse(JSON.stringify(gameState.solution)), // 깊은 복사
       timer: gameState.timer,
       errorCount: gameState.errorCount,
