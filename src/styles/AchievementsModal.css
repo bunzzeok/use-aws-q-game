@@ -5,18 +5,22 @@
 
 .achievements-modal h2 {
   margin-top: 0;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--border-color, #eee);
-  padding-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .achievements-summary {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  border-radius: 8px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .summary-item {
@@ -24,89 +28,127 @@
 }
 
 .summary-value {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--primary-color, #4a90e2);
-  margin-bottom: 5px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 6px;
 }
 
 .summary-label {
   font-size: 14px;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .achievements-filters {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border-color, #eee);
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--secondary-bg-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .filter-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .filter-group label {
   font-weight: 500;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .filter-group select {
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color, #ddd);
-  background-color: var(--input-bg, #ffffff);
-  color: var(--input-text, #333333);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--input-text);
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px top 50%;
+  background-size: 10px auto;
+  padding-right: 28px;
+  transition: all 0.3s ease;
+}
+
+.filter-group select:hover {
+  border-color: var(--primary-color);
 }
 
 .achievements-list {
   max-height: 400px;
   overflow-y: auto;
   margin-bottom: 20px;
-  padding-right: 5px;
+  padding-right: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.achievements-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.achievements-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.achievements-list::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 6px;
 }
 
 .no-achievements {
   text-align: center;
-  padding: 30px;
-  color: var(--secondary-text-color, #666);
+  padding: 40px 20px;
+  color: var(--secondary-text-color);
   font-style: italic;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .achievement-item {
   display: flex;
-  margin-bottom: 15px;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  transition: transform 0.2s;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: var(--secondary-bg-color);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .achievement-item:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .achievement-item.unlocked {
-  border-left: 4px solid var(--success-color, #4caf50);
+  border-left: 4px solid var(--success-color);
 }
 
 .achievement-item.locked {
-  border-left: 4px solid var(--secondary-text-color, #9e9e9e);
+  border-left: 4px solid var(--secondary-text-color);
   opacity: 0.8;
 }
 
 .achievement-icon {
-  font-size: 32px;
-  margin-right: 15px;
+  font-size: 36px;
+  margin-right: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--bg-color);
+  border-radius: 50%;
+  box-shadow: 0 2px 6px var(--shadow-color);
 }
 
 .achievement-content {
@@ -114,102 +156,132 @@
 }
 
 .achievement-title {
-  margin: 0 0 5px;
-  color: var(--text-color, #333);
+  margin: 0 0 6px;
+  color: var(--text-color);
   font-size: 18px;
+  font-weight: 600;
 }
 
 .achievement-description {
-  margin: 0 0 10px;
-  color: var(--secondary-text-color, #666);
+  margin: 0 0 12px;
+  color: var(--secondary-text-color);
   font-size: 14px;
+  line-height: 1.4;
 }
 
 .achievement-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  margin-bottom: 10px;
+  gap: 16px;
+  margin-bottom: 12px;
   font-size: 13px;
 }
 
 .achievement-category {
-  background-color: var(--tag-bg, #e0e0e0);
-  color: var(--tag-text, #333);
-  padding: 3px 8px;
+  background-color: var(--tag-bg);
+  color: var(--tag-text);
+  padding: 4px 10px;
   border-radius: 12px;
-}
-
-.achievement-points {
-  color: var(--primary-color, #4a90e2);
   font-weight: 500;
 }
 
+.achievement-points {
+  color: var(--primary-color);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.achievement-points::before {
+  content: "✨";
+  margin-right: 4px;
+}
+
 .achievement-date {
-  color: var(--secondary-text-color, #666);
+  color: var(--secondary-text-color);
 }
 
 .achievement-progress {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 12px;
 }
 
 .progress-bar {
   flex: 1;
   height: 8px;
-  background-color: var(--progress-bg, #e0e0e0);
+  background-color: var(--progress-bg);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: var(--progress-fill, #4a90e2);
+  background-color: var(--progress-fill);
   border-radius: 4px;
+  transition: width 0.5s ease-out;
 }
 
 .progress-text {
   font-size: 12px;
-  color: var(--secondary-text-color, #666);
+  color: var(--secondary-text-color);
   min-width: 40px;
   text-align: right;
+  font-weight: 500;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .reset-button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--delete-button-bg, #f44336);
-  color: var(--delete-button-text, white);
-  font-size: 14px;
+  border-radius: 12px;
+  background-color: var(--delete-button-bg);
+  color: var(--delete-button-text);
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .reset-button:hover {
-  background-color: var(--delete-button-hover-bg, #d32f2f);
+  background-color: var(--delete-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .close-button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--secondary-button-bg, #f5f5f5);
-  color: var(--secondary-button-text, #333);
-  font-size: 14px;
+  border-radius: 12px;
+  background-color: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .close-button:hover {
-  background-color: var(--secondary-button-hover-bg, #e0e0e0);
+  background-color: var(--secondary-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.close-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }

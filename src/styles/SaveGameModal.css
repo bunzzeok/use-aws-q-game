@@ -4,101 +4,146 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--modal-overlay-bg);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .modal-content {
-  background-color: var(--bg-color, white);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background-color: var(--modal-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px var(--shadow-color);
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow-y: auto;
+  animation: scale-in 0.3s ease-out;
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .save-game-modal h2 {
   margin-top: 0;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--border-color, #eee);
-  padding-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   font-weight: 500;
-  color: var(--text-color, #333);
+  color: var(--text-color);
+  font-size: 15px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid var(--border-color, #ddd);
-  border-radius: 4px;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
   font-size: 16px;
-  background-color: var(--input-bg, #ffffff);
-  color: var(--input-text, #333333);
+  background-color: var(--input-bg);
+  color: var(--input-text);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.2);
 }
 
 .error-message {
-  color: var(--error-color, #e53935);
+  color: var(--error-count-color);
   margin: 10px 0;
   font-size: 14px;
+  animation: shake 0.4s ease-in-out;
 }
 
 .game-info {
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  border-radius: 4px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .game-info p {
-  margin: 5px 0;
-  color: var(--text-color, #333);
+  margin: 8px 0;
+  color: var(--text-color);
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.game-info p strong {
+  color: var(--primary-color);
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .cancel-button,
 .save-button {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .cancel-button {
-  background-color: var(--cancel-button-bg, #f5f5f5);
-  color: var(--cancel-button-text, #333);
+  background-color: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
 }
 
 .save-button {
-  background-color: var(--primary-button-bg, #4a90e2);
-  color: var(--primary-button-text, white);
+  background-color: var(--primary-color);
+  color: white;
 }
 
 .cancel-button:hover {
-  background-color: var(--cancel-button-hover-bg, #e0e0e0);
+  background-color: var(--secondary-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .save-button:hover {
-  background-color: var(--primary-button-hover-bg, #357abd);
+  background-color: var(--button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.cancel-button:active,
+.save-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }

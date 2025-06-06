@@ -4,120 +4,157 @@
 
 .statistics-modal h2 {
   margin-top: 0;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--border-color, #eee);
-  padding-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .statistics-section {
-  margin-bottom: 25px;
+  margin-bottom: 28px;
 }
 
 .statistics-section h3 {
   margin-top: 0;
-  margin-bottom: 15px;
-  color: var(--text-color, #333);
+  margin-bottom: 16px;
+  color: var(--text-color);
   font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 .statistics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 16px;
 }
 
 .statistic-item {
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  border-radius: 8px;
-  padding: 15px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  padding: 16px;
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .statistic-item:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .statistic-value {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--primary-color, #4a90e2);
-  margin-bottom: 5px;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 6px;
 }
 
 .statistic-label {
   font-size: 14px;
-  color: var(--text-color, #333);
+  color: var(--text-color);
 }
 
 .statistics-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-top: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .statistics-table th,
 .statistics-table td {
-  padding: 10px;
+  padding: 12px;
   text-align: left;
-  border-bottom: 1px solid var(--border-color, #eee);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .statistics-table th {
-  font-weight: bold;
-  color: var(--text-color, #333);
-  background-color: var(--secondary-bg-color, #f5f5f5);
+  font-weight: 600;
+  color: var(--text-color);
+  background-color: var(--secondary-bg-color);
+}
+
+.statistics-table tr:last-child td {
+  border-bottom: none;
 }
 
 .statistics-list {
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  border-radius: 8px;
-  padding: 15px;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .statistic-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .statistic-row:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 24px;
 }
 
 .reset-button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--delete-button-bg, #f44336);
-  color: var(--delete-button-text, white);
-  font-size: 14px;
+  border-radius: 12px;
+  background-color: var(--delete-button-bg);
+  color: var(--delete-button-text);
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .reset-button:hover {
-  background-color: var(--delete-button-hover-bg, #d32f2f);
+  background-color: var(--delete-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.reset-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .close-button {
-  padding: 8px 16px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--secondary-button-bg, #f5f5f5);
-  color: var(--secondary-button-text, #333);
-  font-size: 14px;
+  border-radius: 12px;
+  background-color: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .close-button:hover {
-  background-color: var(--secondary-button-hover-bg, #e0e0e0);
+  background-color: var(--secondary-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.close-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }

@@ -1,85 +1,136 @@
 .game-menu {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  margin: 10px 0;
+  gap: 12px;
+  margin: 16px 0;
   flex-wrap: wrap;
+  padding: 0 16px;
 }
 
 .menu-button {
-  padding: 8px 16px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 12px;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .menu-button:hover:not(:disabled) {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
 }
 
 .menu-button:active:not(:disabled) {
   transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .new-game-button {
-  background-color: var(--new-game-button-bg, #4caf50);
-  color: var(--new-game-button-text, white);
+  background-color: var(--new-game-button-bg);
+  color: var(--new-game-button-text);
 }
 
 .new-game-button:hover:not(:disabled) {
-  background-color: var(--new-game-button-hover-bg, #43a047);
+  background-color: var(--new-game-button-hover-bg);
+}
+
+.new-game-button::before {
+  content: "🎮";
+  font-size: 16px;
 }
 
 .save-button {
-  background-color: var(--save-button-bg, #4a90e2);
-  color: var(--save-button-text, white);
+  background-color: var(--save-button-bg);
+  color: var(--save-button-text);
 }
 
 .save-button:hover:not(:disabled) {
-  background-color: var(--save-button-hover-bg, #357abd);
+  background-color: var(--save-button-hover-bg);
+}
+
+.save-button::before {
+  content: "💾";
+  font-size: 16px;
 }
 
 .load-button {
-  background-color: var(--load-button-bg, #ff9800);
-  color: var(--load-button-text, white);
+  background-color: var(--load-button-bg);
+  color: var(--load-button-text);
 }
 
 .load-button:hover:not(:disabled) {
-  background-color: var(--load-button-hover-bg, #f57c00);
+  background-color: var(--load-button-hover-bg);
+}
+
+.load-button::before {
+  content: "📂";
+  font-size: 16px;
 }
 
 .settings-button {
-  background-color: var(--settings-button-bg, #9c27b0);
-  color: var(--settings-button-text, white);
+  background-color: var(--settings-button-bg);
+  color: var(--settings-button-text);
 }
 
 .settings-button:hover:not(:disabled) {
-  background-color: var(--settings-button-hover-bg, #7b1fa2);
+  background-color: var(--settings-button-hover-bg);
+}
+
+.settings-button::before {
+  content: "⚙️";
+  font-size: 16px;
 }
 
 .statistics-button {
-  background-color: var(--statistics-button-bg, #00bcd4);
-  color: var(--statistics-button-text, white);
+  background-color: var(--statistics-button-bg);
+  color: var(--statistics-button-text);
 }
 
 .statistics-button:hover:not(:disabled) {
-  background-color: var(--statistics-button-hover-bg, #00acc1);
+  background-color: var(--statistics-button-hover-bg);
+}
+
+.statistics-button::before {
+  content: "📊";
+  font-size: 16px;
 }
 
 .achievements-button {
-  background-color: var(--achievements-button-bg, #ffc107);
-  color: var(--achievements-button-text, #333);
+  background-color: var(--achievements-button-bg);
+  color: var(--achievements-button-text);
 }
 
 .achievements-button:hover:not(:disabled) {
-  background-color: var(--achievements-button-hover-bg, #ffb300);
+  background-color: var(--achievements-button-hover-bg);
+}
+
+.achievements-button::before {
+  content: "🏆";
+  font-size: 16px;
 }
 
 .menu-button:disabled {
-  background-color: var(--disabled-button-bg, #cccccc);
-  color: var(--disabled-button-text, #666666);
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .game-menu {
+    gap: 8px;
+    padding: 0 8px;
+  }
+  
+  .menu-button {
+    padding: 10px 16px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
 }

@@ -1,10 +1,13 @@
 .sudoku-grid {
   display: flex;
   flex-direction: column;
-  border: 3px solid var(--cell-border, #333333);
+  border: 3px solid var(--cell-border);
   width: fit-content;
   margin: 0 auto;
   transition: border-color 0.3s;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px var(--shadow-color);
 }
 
 .grid-row {
@@ -12,58 +15,68 @@
 }
 
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
-  font-weight: bold;
-  border: 1px solid var(--cell-border, #bbbbbb);
-  background-color: var(--cell-bg, #ffffff);
-  color: var(--cell-text, #333333);
+  font-size: 22px;
+  font-weight: 500;
+  border: 1px solid var(--cell-border);
+  background-color: var(--cell-bg);
+  color: var(--cell-text);
   position: relative;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .cell.initial {
-  background-color: var(--cell-initial-bg, #f5f5f5);
-  color: var(--cell-initial-text, #000000);
-  font-weight: bold;
+  background-color: var(--cell-initial-bg);
+  color: var(--cell-initial-text);
+  font-weight: 600;
 }
 
 .cell.selected {
-  background-color: var(--cell-selected-bg, #bbdefb);
+  background-color: var(--cell-selected-bg);
+  transform: scale(1.05);
+  z-index: 2;
 }
 
 .cell.invalid {
-  background-color: var(--cell-invalid-bg, #ffcdd2);
+  background-color: var(--cell-invalid-bg);
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-2px); }
+  40%, 80% { transform: translateX(2px); }
 }
 
 .cell.highlighted {
-  background-color: var(--cell-highlight-bg, #e3f2fd);
+  background-color: var(--cell-highlight-bg);
 }
 
 .cell.highlighted.selected {
-  background-color: var(--cell-selected-bg, #bbdefb);
+  background-color: var(--cell-selected-bg);
 }
 
 .cell.highlighted.initial {
-  background-color: var(--cell-initial-bg, #f5f5f5);
+  background-color: var(--cell-initial-bg);
 }
 
 .cell.highlighted.invalid {
-  background-color: var(--cell-invalid-bg, #ffcdd2);
+  background-color: var(--cell-invalid-bg);
 }
 
 /* 3x3 박스 테두리 강조 */
 .cell:nth-child(3n) {
-  border-right: 2px solid var(--cell-border, #333333);
+  border-right: 2px solid var(--cell-border);
 }
 
 .grid-row:nth-child(3n) .cell {
-  border-bottom: 2px solid var(--cell-border, #333333);
+  border-bottom: 2px solid var(--cell-border);
 }
 
 /* 노트 스타일 */
@@ -73,9 +86,9 @@
   grid-template-rows: repeat(3, 1fr);
   width: 100%;
   height: 100%;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: normal;
-  color: var(--cell-notes-text, #757575);
+  color: var(--cell-notes-text);
 }
 
 .note {
@@ -86,12 +99,12 @@
 
 @media (max-width: 600px) {
   .cell {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
     font-size: 18px;
   }
   
   .notes-container {
-    font-size: 8px;
+    font-size: 9px;
   }
 }

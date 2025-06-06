@@ -1,110 +1,272 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--bg-color, #ffffff);
-  color: var(--text-color, #333333);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'SF Mono', Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-/* 라이트 모드 (기본) */
+/* 라이트 모드 (기본) - Apple 스타일 */
 :root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --header-color: #2c3e50;
-  --border-color: #dddddd;
+  /* 기본 색상 */
+  --bg-color: #f5f5f7;
+  --text-color: #1d1d1f;
+  --header-color: #1d1d1f;
+  --border-color: #d2d2d7;
+  --shadow-color: rgba(0, 0, 0, 0.1);
   
-  --info-bg: #f5f5f5;
-  --info-border: #e0e0e0;
-  --error-count-color: #e53935;
-  --hints-color: #2196f3;
+  /* 정보 표시 영역 */
+  --info-bg: #ffffff;
+  --info-border: #d2d2d7;
+  --error-count-color: #ff3b30;
+  --hints-color: #007aff;
   
-  --success-bg: #e8f5e9;
-  --success-color: #2e7d32;
-  --success-border: #c8e6c9;
+  /* 메시지 */
+  --success-bg: #e4f8ed;
+  --success-color: #34c759;
+  --success-border: #c7f0d8;
   
-  --fail-bg: #ffebee;
-  --fail-color: #c62828;
-  --fail-border: #ffcdd2;
+  --fail-bg: #ffecec;
+  --fail-color: #ff3b30;
+  --fail-border: #ffd1d1;
   
-  --button-primary-bg: #4a90e2;
-  --button-primary-hover: #357abd;
-  --button-secondary-bg: #4caf50;
-  --button-secondary-hover: #43a047;
+  /* 버튼 */
+  --button-primary-bg: #007aff;
+  --button-primary-hover: #0062cc;
+  --button-secondary-bg: #34c759;
+  --button-secondary-hover: #30b352;
   
+  /* 셀 */
   --cell-bg: #ffffff;
-  --cell-border: #bbbbbb;
-  --cell-selected-bg: #bbdefb;
-  --cell-initial-bg: #f5f5f5;
-  --cell-invalid-bg: #ffcdd2;
-  --cell-highlight-bg: #e3f2fd;
-  --cell-text: #333333;
-  --cell-initial-text: #000000;
-  --cell-notes-text: #757575;
+  --cell-border: #d2d2d7;
+  --cell-selected-bg: #e8f2ff;
+  --cell-initial-bg: #f5f5f7;
+  --cell-invalid-bg: #ffecec;
+  --cell-highlight-bg: #f2f8ff;
+  --cell-text: #1d1d1f;
+  --cell-initial-text: #1d1d1f;
+  --cell-notes-text: #8e8e93;
   
-  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  /* 모달 */
+  --modal-overlay-bg: rgba(0, 0, 0, 0.4);
   --modal-bg: #ffffff;
-  --modal-border: #e0e0e0;
+  --modal-border: #d2d2d7;
   
+  /* 입력 */
   --input-bg: #ffffff;
-  --input-border: #cccccc;
-  --input-text: #333333;
+  --input-border: #d2d2d7;
+  --input-text: #1d1d1f;
   
-  --disabled-bg: #e0e0e0;
-  --disabled-text: #9e9e9e;
+  /* 비활성화 */
+  --disabled-bg: #f5f5f7;
+  --disabled-text: #8e8e93;
+  
+  /* 특수 버튼 */
+  --button-easy-bg: #34c759;
+  --button-easy-hover: #30b352;
+  --button-medium-bg: #ff9500;
+  --button-medium-hover: #e68600;
+  --button-hard-bg: #ff3b30;
+  --button-hard-hover: #e63028;
+  
+  --button-erase-bg: #ff3b30;
+  --button-erase-hover: #e63028;
+  --button-notes-bg: #ff9500;
+  --button-notes-hover: #e68600;
+  --button-notes-active: #ff9500;
+  --button-notes-active-hover: #e68600;
+  --button-hint-bg: #007aff;
+  --button-hint-hover: #0062cc;
+  
+  /* 숫자 패드 */
+  --number-pad-bg: #ffffff;
+  --number-pad-text: #1d1d1f;
+  --number-pad-border: #d2d2d7;
+  --number-pad-hover: #f5f5f7;
+  
+  /* 통계 및 업적 */
+  --primary-color: #007aff;
+  --secondary-text-color: #8e8e93;
+  --tag-bg: #f2f2f7;
+  --tag-text: #1d1d1f;
+  --progress-bg: #e5e5ea;
+  --progress-fill: #007aff;
+  
+  /* 게임 메뉴 버튼 */
+  --new-game-button-bg: #34c759;
+  --new-game-button-hover-bg: #30b352;
+  --new-game-button-text: white;
+  
+  --save-button-bg: #007aff;
+  --save-button-hover-bg: #0062cc;
+  --save-button-text: white;
+  
+  --load-button-bg: #5856d6;
+  --load-button-hover-bg: #4a49b3;
+  --load-button-text: white;
+  
+  --settings-button-bg: #8e8e93;
+  --settings-button-hover-bg: #7a7a7f;
+  --settings-button-text: white;
+  
+  --statistics-button-bg: #ff9500;
+  --statistics-button-hover-bg: #e68600;
+  --statistics-button-text: white;
+  
+  --achievements-button-bg: #af52de;
+  --achievements-button-hover-bg: #9841c1;
+  --achievements-button-text: white;
+  
+  /* 알림 */
+  --notification-bg: #ffffff;
+  --hover-bg: rgba(0, 0, 0, 0.05);
+  
+  /* 삭제 버튼 */
+  --delete-button-bg: #ff3b30;
+  --delete-button-hover-bg: #e63028;
+  --delete-button-text: white;
+  
+  /* 보조 버튼 */
+  --secondary-button-bg: #f5f5f7;
+  --secondary-button-hover-bg: #e5e5ea;
+  --secondary-button-text: #1d1d1f;
+  
+  /* 보조 배경 */
+  --secondary-bg-color: #f2f2f7;
 }
 
-/* 다크 모드 */
+/* 다크 모드 - Apple 스타일 */
 .dark-theme {
-  --bg-color: #121212;
-  --text-color: #e0e0e0;
-  --header-color: #90caf9;
-  --border-color: #424242;
+  /* 기본 색상 */
+  --bg-color: #1c1c1e;
+  --text-color: #f5f5f7;
+  --header-color: #f5f5f7;
+  --border-color: #3a3a3c;
+  --shadow-color: rgba(0, 0, 0, 0.3);
   
-  --info-bg: #2d2d2d;
-  --info-border: #424242;
-  --error-count-color: #ef5350;
-  --hints-color: #64b5f6;
+  /* 정보 표시 영역 */
+  --info-bg: #2c2c2e;
+  --info-border: #3a3a3c;
+  --error-count-color: #ff453a;
+  --hints-color: #0a84ff;
   
-  --success-bg: #1b5e20;
-  --success-color: #a5d6a7;
-  --success-border: #2e7d32;
+  /* 메시지 */
+  --success-bg: #1c392a;
+  --success-color: #30d158;
+  --success-border: #2a5a40;
   
-  --fail-bg: #b71c1c;
-  --fail-color: #ffcdd2;
-  --fail-border: #c62828;
+  --fail-bg: #3b1a1a;
+  --fail-color: #ff453a;
+  --fail-border: #5a2a2a;
   
-  --button-primary-bg: #3a7bc8;
-  --button-primary-hover: #2a6db8;
-  --button-secondary-bg: #388e3c;
-  --button-secondary-hover: #2e7d32;
+  /* 버튼 */
+  --button-primary-bg: #0a84ff;
+  --button-primary-hover: #0974df;
+  --button-secondary-bg: #30d158;
+  --button-secondary-hover: #2abd4e;
   
-  --cell-bg: #2d2d2d;
-  --cell-border: #424242;
-  --cell-selected-bg: #1a3f5f;
-  --cell-initial-bg: #3d3d3d;
-  --cell-invalid-bg: #b71c1c;
-  --cell-highlight-bg: #1a3f5f;
-  --cell-text: #e0e0e0;
+  /* 셀 */
+  --cell-bg: #2c2c2e;
+  --cell-border: #3a3a3c;
+  --cell-selected-bg: #1c3a5a;
+  --cell-initial-bg: #38383a;
+  --cell-invalid-bg: #3b1a1a;
+  --cell-highlight-bg: #1c3a5a;
+  --cell-text: #f5f5f7;
   --cell-initial-text: #ffffff;
-  --cell-notes-text: #9e9e9e;
+  --cell-notes-text: #8e8e93;
   
-  --modal-overlay-bg: rgba(0, 0, 0, 0.7);
-  --modal-bg: #2d2d2d;
-  --modal-border: #424242;
+  /* 모달 */
+  --modal-overlay-bg: rgba(0, 0, 0, 0.6);
+  --modal-bg: #2c2c2e;
+  --modal-border: #3a3a3c;
   
-  --input-bg: #3d3d3d;
-  --input-border: #424242;
-  --input-text: #e0e0e0;
+  /* 입력 */
+  --input-bg: #38383a;
+  --input-border: #3a3a3c;
+  --input-text: #f5f5f7;
   
-  --disabled-bg: #424242;
-  --disabled-text: #757575;
+  /* 비활성화 */
+  --disabled-bg: #38383a;
+  --disabled-text: #8e8e93;
+  
+  /* 특수 버튼 */
+  --button-easy-bg: #30d158;
+  --button-easy-hover: #2abd4e;
+  --button-medium-bg: #ff9f0a;
+  --button-medium-hover: #e08c09;
+  --button-hard-bg: #ff453a;
+  --button-hard-hover: #e03e34;
+  
+  --button-erase-bg: #ff453a;
+  --button-erase-hover: #e03e34;
+  --button-notes-bg: #ff9f0a;
+  --button-notes-hover: #e08c09;
+  --button-notes-active: #ff9f0a;
+  --button-notes-active-hover: #e08c09;
+  --button-hint-bg: #0a84ff;
+  --button-hint-hover: #0974df;
+  
+  /* 숫자 패드 */
+  --number-pad-bg: #2c2c2e;
+  --number-pad-text: #f5f5f7;
+  --number-pad-border: #3a3a3c;
+  --number-pad-hover: #38383a;
+  
+  /* 통계 및 업적 */
+  --primary-color: #0a84ff;
+  --secondary-text-color: #8e8e93;
+  --tag-bg: #38383a;
+  --tag-text: #f5f5f7;
+  --progress-bg: #38383a;
+  --progress-fill: #0a84ff;
+  
+  /* 게임 메뉴 버튼 */
+  --new-game-button-bg: #30d158;
+  --new-game-button-hover-bg: #2abd4e;
+  --new-game-button-text: #1c1c1e;
+  
+  --save-button-bg: #0a84ff;
+  --save-button-hover-bg: #0974df;
+  --save-button-text: #1c1c1e;
+  
+  --load-button-bg: #5e5ce6;
+  --load-button-hover-bg: #5150c8;
+  --load-button-text: #1c1c1e;
+  
+  --settings-button-bg: #8e8e93;
+  --settings-button-hover-bg: #7a7a7f;
+  --settings-button-text: #1c1c1e;
+  
+  --statistics-button-bg: #ff9f0a;
+  --statistics-button-hover-bg: #e08c09;
+  --statistics-button-text: #1c1c1e;
+  
+  --achievements-button-bg: #bf5af2;
+  --achievements-button-hover-bg: #a64fd5;
+  --achievements-button-text: #1c1c1e;
+  
+  /* 알림 */
+  --notification-bg: #2c2c2e;
+  --hover-bg: rgba(255, 255, 255, 0.1);
+  
+  /* 삭제 버튼 */
+  --delete-button-bg: #ff453a;
+  --delete-button-hover-bg: #e03e34;
+  --delete-button-text: #1c1c1e;
+  
+  /* 보조 버튼 */
+  --secondary-button-bg: #38383a;
+  --secondary-button-hover-bg: #48484a;
+  --secondary-button-text: #f5f5f7;
+  
+  /* 보조 배경 */
+  --secondary-bg-color: #2c2c2e;
 }

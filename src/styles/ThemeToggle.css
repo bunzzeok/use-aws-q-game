@@ -5,14 +5,21 @@
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px;
+  padding: 10px;
   font-size: 24px;
-  color: var(--header-color, #2c3e50);
-  transition: color 0.3s, transform 0.2s;
+  color: var(--header-color);
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .theme-toggle:hover {
-  color: var(--theme-toggle-hover, #4a90e2);
+  background-color: var(--secondary-bg-color);
   transform: scale(1.1);
 }
 
@@ -24,4 +31,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: rotate 0.5s ease-in-out;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

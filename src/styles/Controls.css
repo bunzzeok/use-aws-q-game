@@ -1,153 +1,228 @@
 .controls {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
   width: 100%;
   max-width: 450px;
 }
 
 .difficulty-controls {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 12px;
+  margin-top: 16px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .difficulty-controls button {
-  padding: 8px 16px;
-  background-color: var(--button-primary-bg, #4a90e2);
+  padding: 10px 20px;
+  background-color: var(--button-primary-bg);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 14px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .difficulty-controls button:hover {
-  background-color: var(--button-primary-hover, #357abd);
+  background-color: var(--button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.difficulty-controls button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .number-pad {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 5px;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 20px;
   width: 100%;
 }
 
 .number-pad button {
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  background-color: var(--number-pad-bg, #f5f5f5);
-  color: var(--number-pad-text, #333333);
-  border: 1px solid var(--number-pad-border, #dddddd);
-  border-radius: 4px;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  background-color: var(--number-pad-bg);
+  color: var(--number-pad-text);
+  border: 1px solid var(--number-pad-border);
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 6px var(--shadow-color);
 }
 
 .number-pad button:hover:not(:disabled) {
-  background-color: var(--number-pad-hover, #e0e0e0);
+  background-color: var(--number-pad-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.number-pad button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px var(--shadow-color);
 }
 
 .number-pad button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .action-buttons {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
   justify-content: center;
 }
 
 .action-buttons button {
-  padding: 8px 16px;
-  background-color: var(--button-secondary-bg, #4caf50);
+  padding: 12px 20px;
+  background-color: var(--button-secondary-bg);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
   flex: 1;
   max-width: 120px;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .action-buttons button:hover:not(:disabled) {
-  background-color: var(--button-secondary-hover, #43a047);
+  background-color: var(--button-secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.action-buttons button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .action-buttons button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .erase-button {
-  background-color: var(--button-erase-bg, #f44336) !important;
+  background-color: var(--button-erase-bg) !important;
 }
 
 .erase-button:hover:not(:disabled) {
-  background-color: var(--button-erase-hover, #e53935) !important;
+  background-color: var(--button-erase-hover) !important;
+}
+
+.erase-button::before {
+  content: "🗑️";
+  font-size: 16px;
 }
 
 .notes-button {
-  background-color: var(--button-notes-bg, #ff9800) !important;
+  background-color: var(--button-notes-bg) !important;
 }
 
 .notes-button:hover:not(:disabled) {
-  background-color: var(--button-notes-hover, #f57c00) !important;
+  background-color: var(--button-notes-hover) !important;
+}
+
+.notes-button::before {
+  content: "📝";
+  font-size: 16px;
 }
 
 .notes-button.active {
-  background-color: var(--button-notes-active, #ff5722) !important;
+  background-color: var(--button-notes-active) !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  transform: translateY(1px);
 }
 
 .notes-button.active:hover:not(:disabled) {
-  background-color: var(--button-notes-active-hover, #e64a19) !important;
+  background-color: var(--button-notes-active-hover) !important;
+  transform: translateY(0);
 }
 
 .hint-button {
-  background-color: var(--button-hint-bg, #2196f3) !important;
+  background-color: var(--button-hint-bg) !important;
 }
 
 .hint-button:hover:not(:disabled) {
-  background-color: var(--button-hint-hover, #1976d2) !important;
+  background-color: var(--button-hint-hover) !important;
+}
+
+.hint-button::before {
+  content: "💡";
+  font-size: 16px;
 }
 
 .disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .game-controls {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 12px;
+  margin-top: 16px;
   width: 100%;
   justify-content: center;
 }
 
 .game-controls button {
-  padding: 8px 16px;
-  background-color: var(--button-secondary-bg, #4caf50);
+  padding: 12px 20px;
+  background-color: var(--button-secondary-bg);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .game-controls button:hover:not(:disabled) {
-  background-color: var(--button-secondary-hover, #43a047);
+  background-color: var(--button-secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.game-controls button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }
 
 .game-controls button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  .number-pad button {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+  
+  .action-buttons button {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
 }

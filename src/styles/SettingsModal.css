@@ -4,32 +4,62 @@
 
 .settings-modal h2 {
   margin-top: 0;
-  color: var(--text-color, #333);
-  border-bottom: 1px solid var(--border-color, #eee);
-  padding-bottom: 10px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 .settings-section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.settings-section h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 .modal-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .close-button {
-  padding: 8px 16px;
+  padding: 12px 24px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--secondary-button-bg, #f5f5f5);
-  color: var(--secondary-button-text, #333);
-  font-size: 14px;
+  border-radius: 12px;
+  background-color: var(--secondary-button-bg);
+  color: var(--secondary-button-text);
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.close-button::before {
+  content: "✓";
+  font-size: 16px;
 }
 
 .close-button:hover {
-  background-color: var(--secondary-button-hover-bg, #e0e0e0);
+  background-color: var(--secondary-button-hover-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.close-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px var(--shadow-color);
 }

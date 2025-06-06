@@ -1,21 +1,24 @@
 .auto-save-settings {
-  background-color: var(--secondary-bg-color, #f5f5f5);
-  border-radius: 8px;
-  padding: 15px;
-  margin: 15px 0;
+  background-color: var(--secondary-bg-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .auto-save-settings h3 {
   margin-top: 0;
-  margin-bottom: 15px;
-  color: var(--text-color, #333);
-  font-size: 16px;
-  border-bottom: 1px solid var(--border-color, #ddd);
-  padding-bottom: 8px;
+  margin-bottom: 16px;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
 }
 
 .setting-row {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
 }
@@ -23,57 +26,101 @@
 .setting-label {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--text-color, #333);
-  font-size: 14px;
+  gap: 10px;
+  color: var(--text-color);
+  font-size: 15px;
   cursor: pointer;
+  user-select: none;
+  width: 100%;
 }
 
 .setting-label input[type="checkbox"] {
   cursor: pointer;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
 }
 
 .setting-label select {
-  margin-left: 8px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--border-color, #ddd);
-  background-color: var(--input-bg, #ffffff);
-  color: var(--input-text, #333333);
+  margin-left: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background-color: var(--input-bg);
+  color: var(--input-text);
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px top 50%;
+  background-size: 10px auto;
+  padding-right: 28px;
+  transition: all 0.3s ease;
+}
+
+.setting-label select:hover {
+  border-color: var(--primary-color);
 }
 
 .setting-label select:disabled {
-  background-color: var(--disabled-bg, #eeeeee);
+  background-color: var(--disabled-bg);
   cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .save-status {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border-color, #ddd);
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
 }
 
 .last-save-time {
-  font-size: 13px;
-  color: var(--secondary-text-color, #666);
+  font-size: 14px;
+  color: var(--secondary-text-color);
   font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.last-save-time::before {
+  content: "🕒";
+  font-size: 14px;
 }
 
 .save-now-button {
-  padding: 6px 12px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 4px;
-  background-color: var(--primary-button-bg, #4a90e2);
+  border-radius: 10px;
+  background-color: var(--primary-color);
   color: white;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.save-now-button::before {
+  content: "💾";
+  font-size: 14px;
 }
 
 .save-now-button:hover {
-  background-color: var(--primary-button-hover-bg, #357abd);
+  background-color: var(--button-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+
+.save-now-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px var(--shadow-color);
 }
