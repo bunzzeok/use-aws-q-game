@@ -1,0 +1,53 @@
+.history-controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.history-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--button-bg-color, #4a90e2);
+  color: var(--button-text-color, white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.history-button:hover:not(.disabled) {
+  background-color: var(--button-hover-bg-color, #357abd);
+}
+
+.history-button:active:not(.disabled) {
+  transform: scale(0.98);
+}
+
+.history-button.disabled {
+  background-color: var(--button-disabled-bg-color, #cccccc);
+  color: var(--button-disabled-text-color, #666666);
+  cursor: not-allowed;
+}
+
+.button-icon {
+  font-size: 18px;
+  margin-right: 6px;
+}
+
+.button-text {
+  font-weight: 500;
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .history-button {
+    --button-bg-color: #3a7bc8;
+    --button-hover-bg-color: #2a6db8;
+    --button-disabled-bg-color: #444444;
+    --button-disabled-text-color: #999999;
+  }
+}

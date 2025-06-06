@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Grid from './components/Grid';
 import Controls from './components/Controls';
 import ThemeToggle from './components/ThemeToggle';
+import HistoryControls from './components/HistoryControls';
 import { CellState, Difficulty, GameState } from './types';
 import { generatePuzzle } from './utils/sudokuGenerator';
 import { generateAutoNotes, updateNotesAfterInput } from './utils/autoNotes';
+import { gameHistory } from './utils/history/gameHistory';
 import './styles/App.css';
 
 const App: React.FC = () => {
@@ -44,6 +46,9 @@ const App: React.FC = () => {
     if (timerInterval) {
       clearInterval(timerInterval);
     }
+    
+    // 히스토리 초기화
+    gameHistory.clear();
     
     // 새 퍼즐 생성 (검증된 퍼즐과 솔루션)
     const { puzzle, solution } = generatePuzzle(difficulty);
@@ -170,6 +175,9 @@ const App: React.FC = () => {
     const [row, col] = gameState.selectedCell;
     let newGrid = [...gameState.grid];
     
+    // 히스토리에 현재 상태 저장
+    const previousState = { ...newGrid[row][col] };
+    
     // 메모 모드인 경우
     if (isNotesMode) {
       const currentNotes = [...newGrid[row][col].notes];
@@ -187,6 +195,15 @@ const App: React.FC = () => {
         ...newGrid[row][col],
         notes: currentNotes
       };
+      
+      // 히스토리에 액션 추가
+      gameHistory.addAction({
+        type: 'TOGGLE_NOTE',
+        row,
+        col,
+        value: num,
+        previousState
+      });
       
       setGameState({
         ...gameState,
@@ -206,6 +223,15 @@ const App: React.FC = () => {
       isValid: isCorrect,
       notes: []
     };
+    
+    // 히스토리에 액션 추가
+    gameHistory.addAction({
+      type: 'INPUT_NUMBER',
+      row,
+      col,
+      value: num,
+      previousState
+    });
     
     // 자동 메모 활성화 상태라면 관련 셀의 메모 업데이트
     if (autoNotesEnabled && isCorrect) {
@@ -263,6 +289,9 @@ const App: React.FC = () => {
     // 초기 셀은 지울 수 없음
     if (newGrid[row][col].isInitial) return;
     
+    // 히스토리에 현재 상태 저장
+    const previousState = { ...newGrid[row][col] };
+    
     // 자동 메모 활성화 상태라면 지운 셀에 가능한 숫자 메모 생성
     const updatedCell = {
       ...newGrid[row][col],
@@ -272,6 +301,14 @@ const App: React.FC = () => {
     };
     
     newGrid[row][col] = updatedCell;
+    
+    // 히스토리에 액션 추가
+    gameHistory.addAction({
+      type: 'ERASE',
+      row,
+      col,
+      previousState
+    });
     
     // 자동 메모 활성화 상태라면 지운 셀에 가능한 숫자 계산
     let updatedGrid = newGrid;
@@ -354,6 +391,9 @@ const App: React.FC = () => {
     const correctValue = gameState.solution[row][col];
     
     if (correctValue !== null) {
+      // 히스토리에 현재 상태 저장
+      const previousState = { ...gameState.grid[row][col] };
+      
       let newGrid = [...gameState.grid];
       newGrid[row][col] = {
         ...newGrid[row][col],
@@ -361,6 +401,15 @@ const App: React.FC = () => {
         isValid: true,
         notes: []
       };
+      
+      // 히스토리에 액션 추가
+      gameHistory.addAction({
+        type: 'USE_HINT',
+        row,
+        col,
+        value: correctValue,
+        previousState
+      });
       
       // 자동 메모 활성화 상태라면 관련 셀의 메모 업데이트
       if (autoNotesEnabled) {
@@ -394,6 +443,26 @@ const App: React.FC = () => {
         hintsRemaining: gameState.hintsRemaining - 1,
         isComplete
       });
+    }
+  };
+
+  // 실행 취소 핸들러
+  const handleUndo = () => {
+    if (!gameStarted || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
+    
+    if (gameHistory.canUndo()) {
+      const updatedGameState = gameHistory.undo(gameState);
+      setGameState(updatedGameState);
+    }
+  };
+  
+  // 다시 실행 핸들러
+  const handleRedo = () => {
+    if (!gameStarted || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
+    
+    if (gameHistory.canRedo()) {
+      const updatedGameState = gameHistory.redo(gameState);
+      setGameState(updatedGameState);
     }
   };
 
@@ -474,6 +543,15 @@ const App: React.FC = () => {
               isNotesMode={isNotesMode}
               timer={gameState.timer}
               hintsRemaining={gameState.hintsRemaining}
+              isGameOver={gameState.isComplete || gameState.isFailed}
+              isPaused={gameState.isPaused}
+            />
+            
+            <HistoryControls
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              canUndo={gameHistory.canUndo()}
+              canRedo={gameHistory.canRedo()}
               isGameOver={gameState.isComplete || gameState.isFailed}
               isPaused={gameState.isPaused}
             />
