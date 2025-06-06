@@ -48,6 +48,7 @@ const Cell: React.FC<CellProps> = ({
     <div 
       className={cellClass}
       onClick={() => onCellClick(rowIndex, colIndex)}
+      data-testid={`cell-${rowIndex}-${colIndex}`}
     >
       {value ? <span>{value}</span> : renderNotes()}
     </div>

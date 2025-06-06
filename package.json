@@ -2,6 +2,7 @@
   "name": "use-aws-q-game",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bunzzeok.github.io/use-aws-q-game",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -20,11 +21,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "npm run verify-puzzles && npm run test && react-scripts build",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "verify-puzzles": "node src/scripts/verify-puzzles.js",
+    "ci": "npm run verify-puzzles && npm test && npm run build"
   },
   "eslintConfig": {
     "extends": [

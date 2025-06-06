@@ -5,17 +5,44 @@ export const createEmptyGrid = (): GridType => {
   return Array(9).fill(null).map(() => Array(9).fill(null));
 };
 
-// 스도쿠 솔루션 생성
+// 배열을 랜덤하게 섞는 함수
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// 스도쿠 솔루션 생성 (랜덤하게)
 export const generateSolution = (): GridType => {
   const grid = createEmptyGrid();
-  solveSudoku(grid);
+  
+  // 랜덤한 시작점으로 첫 번째 행 채우기
+  const firstRow = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  for (let col = 0; col < 9; col++) {
+    grid[0][col] = firstRow[col];
+  }
+  
+  // 나머지 그리드 채우기
+  if (!solveSudoku(grid)) {
+    // 실패하면 다시 시도
+    return generateSolution();
+  }
+  
   return grid;
 };
 
 // 스도쿠 퍼즐 생성 (솔루션에서 숫자 제거)
 export const generatePuzzle = (difficulty: Difficulty): { puzzle: GridType, solution: GridType } => {
+  // 유효한 솔루션 생성
   const solution = generateSolution();
-  const puzzle = JSON.parse(JSON.stringify(solution)) as GridType;
+  
+  // 추가 랜덤화: 행과 열 교환 (3x3 블록 내에서)
+  const randomizedSolution = randomizeGrid(solution);
+  
+  const puzzle = JSON.parse(JSON.stringify(randomizedSolution)) as GridType;
   
   // 난이도에 따라 제거할 셀 수 결정
   let cellsToRemove: number;
@@ -33,14 +60,23 @@ export const generatePuzzle = (difficulty: Difficulty): { puzzle: GridType, solu
       cellsToRemove = 40;
   }
 
+  // 셀 제거 순서를 랜덤화
+  const allCells: [number, number][] = [];
+  for (let row = 0; row < 9; row++) {
+    for (let col = 0; col < 9; col++) {
+      allCells.push([row, col]);
+    }
+  }
+  
+  // 셀 순서 섞기
+  const shuffledCells = shuffleArray(allCells);
+  
   // 랜덤하게 셀 제거 (최대 시도 횟수 제한)
   let removed = 0;
-  let attempts = 0;
-  const maxAttempts = 1000; // 최대 시도 횟수 제한
+  let cellIndex = 0;
   
-  while (removed < cellsToRemove && attempts < maxAttempts) {
-    const row = Math.floor(Math.random() * 9);
-    const col = Math.floor(Math.random() * 9);
+  while (removed < cellsToRemove && cellIndex < shuffledCells.length) {
+    const [row, col] = shuffledCells[cellIndex++];
     
     if (puzzle[row][col] !== null) {
       // 임시로 값을 제거
@@ -57,8 +93,6 @@ export const generatePuzzle = (difficulty: Difficulty): { puzzle: GridType, solu
         // 유일한 해결책이 없으면 값 복원
         puzzle[row][col] = temp;
       }
-      
-      attempts++;
     }
   }
   
@@ -68,7 +102,100 @@ export const generatePuzzle = (difficulty: Difficulty): { puzzle: GridType, solu
     return generatePuzzle(difficulty);
   }
   
-  return { puzzle, solution };
+  return { puzzle, solution: randomizedSolution };
+};
+
+// 그리드를 추가로 랜덤화하는 함수 (3x3 블록 내에서 행과 열 교환)
+const randomizeGrid = (grid: GridType): GridType => {
+  const newGrid = JSON.parse(JSON.stringify(grid)) as GridType;
+  
+  // 각 3x3 블록 내에서 행 교환
+  for (let block = 0; block < 3; block++) {
+    const rowStart = block * 3;
+    
+    // 각 블록 내에서 행 교환 횟수
+    const swapCount = 2 + Math.floor(Math.random() * 3); // 2~4회
+    
+    for (let i = 0; i < swapCount; i++) {
+      const row1 = rowStart + Math.floor(Math.random() * 3);
+      let row2 = rowStart + Math.floor(Math.random() * 3);
+      
+      // 같은 행이 선택되지 않도록
+      while (row1 === row2) {
+        row2 = rowStart + Math.floor(Math.random() * 3);
+      }
+      
+      // 행 교환
+      for (let col = 0; col < 9; col++) {
+        [newGrid[row1][col], newGrid[row2][col]] = [newGrid[row2][col], newGrid[row1][col]];
+      }
+    }
+  }
+  
+  // 각 3x3 블록 내에서 열 교환
+  for (let block = 0; block < 3; block++) {
+    const colStart = block * 3;
+    
+    // 각 블록 내에서 열 교환 횟수
+    const swapCount = 2 + Math.floor(Math.random() * 3); // 2~4회
+    
+    for (let i = 0; i < swapCount; i++) {
+      const col1 = colStart + Math.floor(Math.random() * 3);
+      let col2 = colStart + Math.floor(Math.random() * 3);
+      
+      // 같은 열이 선택되지 않도록
+      while (col1 === col2) {
+        col2 = colStart + Math.floor(Math.random() * 3);
+      }
+      
+      // 열 교환
+      for (let row = 0; row < 9; row++) {
+        [newGrid[row][col1], newGrid[row][col2]] = [newGrid[row][col2], newGrid[row][col1]];
+      }
+    }
+  }
+  
+  // 3x3 블록 자체를 교환 (행 방향)
+  const blockRowSwaps = Math.floor(Math.random() * 3); // 0~2회
+  for (let i = 0; i < blockRowSwaps; i++) {
+    const block1 = Math.floor(Math.random() * 3);
+    let block2 = Math.floor(Math.random() * 3);
+    
+    // 같은 블록이 선택되지 않도록
+    while (block1 === block2) {
+      block2 = Math.floor(Math.random() * 3);
+    }
+    
+    // 블록 교환 (행 방향)
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 9; col++) {
+        [newGrid[block1 * 3 + row][col], newGrid[block2 * 3 + row][col]] = 
+        [newGrid[block2 * 3 + row][col], newGrid[block1 * 3 + row][col]];
+      }
+    }
+  }
+  
+  // 3x3 블록 자체를 교환 (열 방향)
+  const blockColSwaps = Math.floor(Math.random() * 3); // 0~2회
+  for (let i = 0; i < blockColSwaps; i++) {
+    const block1 = Math.floor(Math.random() * 3);
+    let block2 = Math.floor(Math.random() * 3);
+    
+    // 같은 블록이 선택되지 않도록
+    while (block1 === block2) {
+      block2 = Math.floor(Math.random() * 3);
+    }
+    
+    // 블록 교환 (열 방향)
+    for (let col = 0; col < 3; col++) {
+      for (let row = 0; row < 9; row++) {
+        [newGrid[row][block1 * 3 + col], newGrid[row][block2 * 3 + col]] = 
+        [newGrid[row][block2 * 3 + col], newGrid[row][block1 * 3 + col]];
+      }
+    }
+  }
+  
+  return newGrid;
 };
 
 // 유일한 해결책이 있는지 확인
@@ -96,7 +223,10 @@ const hasAnotherSolution = (grid: GridType, firstSolution: GridType): boolean =>
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
       if (grid[row][col] === null) {
-        for (let num = 1; num <= 9; num++) {
+        // 첫 번째 해결책과 다른 값을 먼저 시도하기 위해 숫자 순서를 섞음
+        const numbers = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+        
+        for (const num of numbers) {
           // 첫 번째 해결책과 다른 값 시도
           if (firstSolution[row][col] !== num && isValidPlacement(grid, row, col, num)) {
             grid[row][col] = num;
@@ -138,26 +268,64 @@ export const solveSudoku = (grid: GridType): boolean => {
       return false; // 최대 재귀 깊이 초과
     }
     
+    // 빈 셀 찾기
+    let emptyCell: [number, number] | null = null;
+    
+    // 가장 제약이 많은 셀 먼저 채우기 (MRV - Minimum Remaining Values)
+    let minPossibleValues = 10; // 1~9까지 가능하므로 10으로 초기화
+    
     for (let row = 0; row < 9; row++) {
       for (let col = 0; col < 9; col++) {
         if (grid[row][col] === null) {
-          // 1-9 숫자 시도
+          // 이 셀에 가능한 값의 개수 계산
+          let possibleCount = 0;
           for (let num = 1; num <= 9; num++) {
             if (isValidPlacement(grid, row, col, num)) {
-              grid[row][col] = num;
-              
-              if (solve(grid)) {
-                return true;
-              }
-              
-              grid[row][col] = null; // 백트래킹
+              possibleCount++;
             }
           }
-          return false; // 해결책 없음
+          
+          if (possibleCount < minPossibleValues) {
+            minPossibleValues = possibleCount;
+            emptyCell = [row, col];
+            
+            // 가능한 값이 1개면 더 이상 찾을 필요 없음
+            if (possibleCount === 1) {
+              break;
+            }
+          }
         }
       }
+      
+      // 가능한 값이 1개인 셀을 찾았으면 더 이상 찾을 필요 없음
+      if (minPossibleValues === 1 && emptyCell) {
+        break;
+      }
     }
-    return true; // 모든 셀이 채워짐
+    
+    // 빈 셀이 없으면 완료
+    if (!emptyCell) {
+      return true;
+    }
+    
+    const [row, col] = emptyCell;
+    
+    // 1-9 숫자를 랜덤 순서로 시도
+    const numbers = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+    
+    for (const num of numbers) {
+      if (isValidPlacement(grid, row, col, num)) {
+        grid[row][col] = num;
+        
+        if (solve(grid)) {
+          return true;
+        }
+        
+        grid[row][col] = null; // 백트래킹
+      }
+    }
+    
+    return false; // 해결책 없음
   };
   
   return solve(grid);
@@ -254,3 +422,4 @@ const isValidBox = (grid: GridType, box: number): boolean => {
   }
   return true;
 };
+
