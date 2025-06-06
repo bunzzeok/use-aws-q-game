@@ -18,7 +18,7 @@
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 30px var(--shadow-color);
-  max-width: 400px;
+  max-width: 320px;
   width: 90%;
   text-align: center;
   animation: scale-in 0.3s ease-out;
@@ -27,14 +27,21 @@
 .pause-content h2 {
   margin-top: 0;
   color: var(--text-color);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.5px;
+  margin-bottom: 16px;
 }
 
 .pause-content p {
   margin-bottom: 24px;
   color: var(--secondary-text-color);
+  font-size: 15px;
+}
+
+.pause-content .modal-button {
+  width: 100%;
+  margin-top: 8px;
 }
 
 .pause-button {
@@ -72,4 +79,12 @@
 @keyframes scale-in {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+}
+.history-controls-container {
+  margin-top: 8px;
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
 }

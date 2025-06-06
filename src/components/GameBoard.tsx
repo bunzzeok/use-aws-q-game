@@ -118,12 +118,14 @@ const GameBoard: React.FC<GameBoardProps> = ({
                 usedNumbers={usedNumbers}
               />
 
-              <HistoryControls
-                onUndo={onUndo}
-                onRedo={onRedo}
-                canUndo={canUndo}
-                canRedo={canRedo}
-              />
+              <div className="history-controls-container">
+                <HistoryControls
+                  onUndo={onUndo}
+                  onRedo={onRedo}
+                  canUndo={canUndo}
+                  canRedo={canRedo}
+                />
+              </div>
 
               <div className="options">
                 <label className="auto-notes-toggle">

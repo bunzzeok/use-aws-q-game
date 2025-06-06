@@ -1,27 +1,28 @@
 .load-game-modal {
-  max-width: 600px;
+  max-width: 550px;
+  width: 95%;
 }
 
 .auto-save-section {
   background-color: var(--secondary-bg-color);
   border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 24px;
+  padding: 16px;
+  margin-bottom: 20px;
   box-shadow: 0 2px 8px var(--shadow-color);
   border-left: 4px solid var(--primary-color);
 }
 
 .auto-save-section p {
-  margin: 0 0 16px;
+  margin: 0 0 12px;
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
 .auto-save-actions {
   display: flex;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .saved-games-list {
@@ -81,22 +82,22 @@
 }
 
 .game-info h4 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .game-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
 }
 
 .game-details p {
-  margin: 4px 0;
+  margin: 3px 0;
   color: var(--secondary-text-color);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .game-actions {
