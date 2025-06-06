@@ -128,6 +128,7 @@ const App: React.FC = () => {
         onNewGame={() => setGameStarted(false)}
         onSettings={() => setShowSettingsModal(true)}
         onStatistics={handleShowStatisticsModal}
+        onAchievements={() => {}}
         isGameStarted={gameStarted}
         isGameOver={gameState.isComplete || gameState.isFailed}
       />

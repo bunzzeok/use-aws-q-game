@@ -7,6 +7,7 @@ interface GameMenuProps {
   onNewGame: () => void;
   onSettings: () => void;
   onStatistics: () => void;
+  onAchievements: () => void;
   isGameStarted: boolean;
   isGameOver: boolean;
 }
@@ -20,6 +21,7 @@ const GameMenu: React.FC<GameMenuProps> = ({
   onNewGame,
   onSettings,
   onStatistics,
+  onAchievements,
   isGameStarted,
   isGameOver
 }) => {
@@ -66,6 +68,14 @@ const GameMenu: React.FC<GameMenuProps> = ({
         title="게임 통계"
       >
         통계
+      </button>
+      
+      <button 
+        className="menu-button achievements-button"
+        onClick={onAchievements}
+        title="업적"
+      >
+        업적
       </button>
     </div>
   );

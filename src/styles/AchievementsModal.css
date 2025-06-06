@@ -1,0 +1,215 @@
+.achievements-modal {
+  max-width: 700px;
+  max-height: 80vh;
+}
+
+.achievements-modal h2 {
+  margin-top: 0;
+  color: var(--text-color, #333);
+  border-bottom: 1px solid var(--border-color, #eee);
+  padding-bottom: 10px;
+}
+
+.achievements-summary {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: var(--secondary-bg-color, #f5f5f5);
+  border-radius: 8px;
+}
+
+.summary-item {
+  text-align: center;
+}
+
+.summary-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color, #4a90e2);
+  margin-bottom: 5px;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: var(--text-color, #333);
+}
+
+.achievements-filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color, #eee);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-group label {
+  font-weight: 500;
+  color: var(--text-color, #333);
+}
+
+.filter-group select {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #ddd);
+  background-color: var(--input-bg, #ffffff);
+  color: var(--input-text, #333333);
+  cursor: pointer;
+}
+
+.achievements-list {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 5px;
+}
+
+.no-achievements {
+  text-align: center;
+  padding: 30px;
+  color: var(--secondary-text-color, #666);
+  font-style: italic;
+}
+
+.achievement-item {
+  display: flex;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: var(--secondary-bg-color, #f5f5f5);
+  transition: transform 0.2s;
+}
+
+.achievement-item:hover {
+  transform: translateY(-2px);
+}
+
+.achievement-item.unlocked {
+  border-left: 4px solid var(--success-color, #4caf50);
+}
+
+.achievement-item.locked {
+  border-left: 4px solid var(--secondary-text-color, #9e9e9e);
+  opacity: 0.8;
+}
+
+.achievement-icon {
+  font-size: 32px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+}
+
+.achievement-content {
+  flex: 1;
+}
+
+.achievement-title {
+  margin: 0 0 5px;
+  color: var(--text-color, #333);
+  font-size: 18px;
+}
+
+.achievement-description {
+  margin: 0 0 10px;
+  color: var(--secondary-text-color, #666);
+  font-size: 14px;
+}
+
+.achievement-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.achievement-category {
+  background-color: var(--tag-bg, #e0e0e0);
+  color: var(--tag-text, #333);
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.achievement-points {
+  color: var(--primary-color, #4a90e2);
+  font-weight: 500;
+}
+
+.achievement-date {
+  color: var(--secondary-text-color, #666);
+}
+
+.achievement-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background-color: var(--progress-bg, #e0e0e0);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--progress-fill, #4a90e2);
+  border-radius: 4px;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: var(--secondary-text-color, #666);
+  min-width: 40px;
+  text-align: right;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.reset-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--delete-button-bg, #f44336);
+  color: var(--delete-button-text, white);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reset-button:hover {
+  background-color: var(--delete-button-hover-bg, #d32f2f);
+}
+
+.close-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--secondary-button-bg, #f5f5f5);
+  color: var(--secondary-button-text, #333);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.close-button:hover {
+  background-color: var(--secondary-button-hover-bg, #e0e0e0);
+}
