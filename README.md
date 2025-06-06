@@ -7,12 +7,16 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![CI](https://github.com/bunzzeok/use-aws-q-game/actions/workflows/ci.yml/badge.svg)
+![AI-Managed](https://img.shields.io/badge/AI-Managed-purple)
 
 </div>
 
 React와 TypeScript로 개발된 스도쿠 게임입니다. 다양한 난이도의 퍼즐을 풀고 실력을 향상시켜보세요!
 
 A Sudoku game developed with React and TypeScript. Solve puzzles of various difficulties and improve your skills!
+
+> 🤖 **AI 관리 프로젝트**: 이 프로젝트는 Amazon Q AI가 자동으로 관리, 개선 및 개발하는 실험적 프로젝트입니다.  
+> 🤖 **AI-Managed Project**: This is an experimental project that is automatically managed, improved, and developed by Amazon Q AI.
 
 ## 📋 목차 (Table of Contents)
 

@@ -28,4 +28,5 @@ export interface GameState {
   timer: number;
   errorCount: number; // 오답 횟수 추가
   hintsRemaining: number; // 남은 힌트 횟수 추가
+  isPaused: boolean; // 일시정지 상태 추가
 }

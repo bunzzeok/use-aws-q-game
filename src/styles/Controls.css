@@ -18,16 +18,17 @@
 
 .difficulty-controls button {
   padding: 8px 16px;
-  background-color: #4caf50;
+  background-color: var(--button-primary-bg);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.3s;
 }
 
 .difficulty-controls button:hover {
-  background-color: #45a049;
+  background-color: var(--button-primary-hover);
 }
 
 .number-pad {
@@ -42,18 +43,19 @@
   width: 40px;
   height: 40px;
   font-size: 18px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
+  background-color: var(--number-pad-bg);
+  border: 1px solid var(--number-pad-border);
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .number-pad button:hover:not(:disabled) {
-  background-color: #e0e0e0;
+  background-color: var(--number-pad-hover);
 }
 
 .number-pad button:disabled {
-  opacity: 0.6;
+  opacity: var(--disabled-opacity);
   cursor: not-allowed;
 }
 
@@ -66,33 +68,61 @@
 
 .action-buttons button {
   padding: 8px 16px;
-  background-color: #2196f3;
+  background-color: var(--button-secondary-bg);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   flex: 1;
   max-width: 120px;
+  transition: background-color 0.3s;
 }
 
 .action-buttons button:hover:not(:disabled) {
-  background-color: #0b7dda;
+  background-color: var(--button-secondary-hover);
 }
 
 .action-buttons button:disabled {
-  opacity: 0.6;
+  opacity: var(--disabled-opacity);
   cursor: not-allowed;
 }
 
 .notes-button.active {
-  background-color: #ff9800;
+  background-color: var(--button-notes-active);
 }
 
 .notes-button.active:hover:not(:disabled) {
-  background-color: #e68a00;
+  background-color: var(--button-notes-hover);
 }
 
 .disabled {
-  opacity: 0.6;
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.game-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+}
+
+.game-controls button {
+  padding: 8px 16px;
+  background-color: var(--button-secondary-bg);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.game-controls button:hover:not(:disabled) {
+  background-color: var(--button-secondary-hover);
+}
+
+.game-controls button:disabled {
+  opacity: var(--disabled-opacity);
   cursor: not-allowed;
 }

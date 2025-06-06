@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Grid from './components/Grid';
 import Controls from './components/Controls';
+import ThemeToggle from './components/ThemeToggle';
 import { CellState, Difficulty, GameState } from './types';
 import { generatePuzzle } from './utils/sudokuGenerator';
+import { generateAutoNotes, updateNotesAfterInput } from './utils/autoNotes';
 import './styles/App.css';
 
 const App: React.FC = () => {
@@ -27,12 +29,14 @@ const App: React.FC = () => {
     isFailed: false,
     timer: 0,
     errorCount: 0,
-    hintsRemaining: 3 // 기본 힌트 3개
+    hintsRemaining: 3, // 기본 힌트 3개
+    isPaused: false // 타이머 일시정지 상태 추가
   });
   
   const [isNotesMode, setIsNotesMode] = useState<boolean>(false);
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
   const [gameStarted, setGameStarted] = useState<boolean>(false);
+  const [autoNotesEnabled, setAutoNotesEnabled] = useState<boolean>(false);
 
   // 게임 시작 함수
   const startGame = (difficulty: Difficulty) => {
@@ -70,8 +74,11 @@ const App: React.FC = () => {
       }))
     );
     
+    // 자동 메모 활성화 상태라면 메모 생성
+    const gridWithNotes = autoNotesEnabled ? generateAutoNotes(initialGrid) : initialGrid;
+    
     setGameState({
-      grid: initialGrid,
+      grid: gridWithNotes,
       solution: solution,
       selectedCell: null,
       difficulty,
@@ -79,25 +86,70 @@ const App: React.FC = () => {
       isFailed: false,
       timer: 0,
       errorCount: 0,
-      hintsRemaining
+      hintsRemaining,
+      isPaused: false
     });
     
     // 타이머 시작
     const interval = setInterval(() => {
-      setGameState(prev => ({
-        ...prev,
-        timer: prev.timer + 1
-      }));
+      setGameState(prev => {
+        // 일시정지 상태면 타이머 증가하지 않음
+        if (prev.isPaused) return prev;
+        return {
+          ...prev,
+          timer: prev.timer + 1
+        };
+      });
     }, 1000);
     
     setTimerInterval(interval);
     setGameStarted(true);
   };
 
+  // 타이머 일시정지/재개 토글
+  const togglePause = () => {
+    if (!gameStarted || gameState.isComplete || gameState.isFailed) return;
+    
+    setGameState(prev => ({
+      ...prev,
+      isPaused: !prev.isPaused
+    }));
+  };
+
+  // 자동 메모 토글
+  const toggleAutoNotes = () => {
+    const newAutoNotesEnabled = !autoNotesEnabled;
+    setAutoNotesEnabled(newAutoNotesEnabled);
+    
+    // 게임이 시작된 상태라면 현재 그리드에 자동 메모 적용/제거
+    if (gameStarted && !gameState.isComplete && !gameState.isFailed) {
+      if (newAutoNotesEnabled) {
+        // 자동 메모 활성화
+        setGameState(prev => ({
+          ...prev,
+          grid: generateAutoNotes(prev.grid)
+        }));
+      } else {
+        // 자동 메모 비활성화 - 사용자가 직접 입력한 메모는 유지
+        const newGrid = gameState.grid.map(row => 
+          row.map(cell => ({
+            ...cell,
+            notes: cell.value === null && !cell.isInitial ? [] : cell.notes
+          }))
+        );
+        
+        setGameState(prev => ({
+          ...prev,
+          grid: newGrid
+        }));
+      }
+    }
+  };
+
   // 셀 클릭 핸들러
   const handleCellClick = (row: number, col: number) => {
     // 게임이 시작되지 않았거나 실패/완료 상태면 아무 동작 안함
-    if (!gameStarted || gameState.isComplete || gameState.isFailed) return;
+    if (!gameStarted || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
     // 이미 채워진 초기 셀은 선택 불가
     if (gameState.grid[row][col].isInitial) {
@@ -113,10 +165,10 @@ const App: React.FC = () => {
   // 숫자 입력 핸들러
   const handleNumberClick = (num: number) => {
     // 게임이 시작되지 않았거나 선택된 셀이 없거나 실패/완료 상태면 아무 동작 안함
-    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed) return;
+    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
     const [row, col] = gameState.selectedCell;
-    const newGrid = [...gameState.grid];
+    let newGrid = [...gameState.grid];
     
     // 메모 모드인 경우
     if (isNotesMode) {
@@ -154,6 +206,11 @@ const App: React.FC = () => {
       isValid: isCorrect,
       notes: []
     };
+    
+    // 자동 메모 활성화 상태라면 관련 셀의 메모 업데이트
+    if (autoNotesEnabled && isCorrect) {
+      newGrid = updateNotesAfterInput(newGrid, row, col, num);
+    }
     
     let updatedErrorCount = gameState.errorCount;
     // 오답인 경우 오류 카운트 증가
@@ -198,7 +255,7 @@ const App: React.FC = () => {
   // 지우기 버튼 핸들러
   const handleEraseClick = () => {
     // 게임이 시작되지 않았거나 선택된 셀이 없거나 실패/완료 상태면 아무 동작 안함
-    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed) return;
+    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
     const [row, col] = gameState.selectedCell;
     const newGrid = [...gameState.grid];
@@ -206,23 +263,77 @@ const App: React.FC = () => {
     // 초기 셀은 지울 수 없음
     if (newGrid[row][col].isInitial) return;
     
-    newGrid[row][col] = {
+    // 자동 메모 활성화 상태라면 지운 셀에 가능한 숫자 메모 생성
+    const updatedCell = {
       ...newGrid[row][col],
       value: null,
       isValid: true,
-      notes: []
+      notes: autoNotesEnabled ? [] : newGrid[row][col].notes
     };
+    
+    newGrid[row][col] = updatedCell;
+    
+    // 자동 메모 활성화 상태라면 지운 셀에 가능한 숫자 계산
+    let updatedGrid = newGrid;
+    if (autoNotesEnabled) {
+      const valueGrid = newGrid.map(r => r.map(c => c.value));
+      const possibleNumbers: number[] = [];
+      
+      for (let num = 1; num <= 9; num++) {
+        let canPlace = true;
+        
+        // 같은 행에 같은 숫자가 있는지 확인
+        for (let c = 0; c < 9; c++) {
+          if (newGrid[row][c].value === num) {
+            canPlace = false;
+            break;
+          }
+        }
+        
+        // 같은 열에 같은 숫자가 있는지 확인
+        if (canPlace) {
+          for (let r = 0; r < 9; r++) {
+            if (newGrid[r][col].value === num) {
+              canPlace = false;
+              break;
+            }
+          }
+        }
+        
+        // 같은 3x3 박스에 같은 숫자가 있는지 확인
+        if (canPlace) {
+          const boxRow = Math.floor(row / 3) * 3;
+          const boxCol = Math.floor(col / 3) * 3;
+          
+          for (let r = boxRow; r < boxRow + 3; r++) {
+            for (let c = boxCol; c < boxCol + 3; c++) {
+              if (newGrid[r][c].value === num) {
+                canPlace = false;
+                break;
+              }
+            }
+            if (!canPlace) break;
+          }
+        }
+        
+        if (canPlace) {
+          possibleNumbers.push(num);
+        }
+      }
+      
+      updatedGrid[row][col].notes = possibleNumbers;
+    }
     
     setGameState({
       ...gameState,
-      grid: newGrid
+      grid: updatedGrid
     });
   };
 
   // 메모 모드 토글
   const handleNotesToggle = () => {
     // 게임이 실패/완료 상태면 아무 동작 안함
-    if (gameState.isComplete || gameState.isFailed) return;
+    if (gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
     setIsNotesMode(!isNotesMode);
   };
@@ -230,7 +341,7 @@ const App: React.FC = () => {
   // 힌트 버튼 핸들러
   const handleHintClick = () => {
     // 게임이 시작되지 않았거나 선택된 셀이 없거나 실패/완료 상태면 아무 동작 안함
-    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed) return;
+    if (!gameStarted || !gameState.selectedCell || gameState.isComplete || gameState.isFailed || gameState.isPaused) return;
     
     // 힌트가 남아있지 않으면 아무 동작 안함
     if (gameState.hintsRemaining <= 0) return;
@@ -244,13 +355,18 @@ const App: React.FC = () => {
     const correctValue = gameState.solution[row][col];
     
     if (correctValue !== null) {
-      const newGrid = [...gameState.grid];
+      let newGrid = [...gameState.grid];
       newGrid[row][col] = {
         ...newGrid[row][col],
         value: correctValue,
         isValid: true,
         notes: []
       };
+      
+      // 자동 메모 활성화 상태라면 관련 셀의 메모 업데이트
+      if (autoNotesEnabled) {
+        newGrid = updateNotesAfterInput(newGrid, row, col, correctValue);
+      }
       
       // 게임 완료 여부 확인
       let isComplete = true;
@@ -286,6 +402,7 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <h1>스도쿠 게임</h1>
+        <ThemeToggle />
       </header>
       
       <div className="game-container">
@@ -297,6 +414,16 @@ const App: React.FC = () => {
               <button onClick={() => startGame(Difficulty.MEDIUM)}>중간 (힌트 3개)</button>
               <button onClick={() => startGame(Difficulty.HARD)}>어려움 (힌트 1개)</button>
             </div>
+            <div className="options">
+              <label className="auto-notes-toggle">
+                <input
+                  type="checkbox"
+                  checked={autoNotesEnabled}
+                  onChange={toggleAutoNotes}
+                />
+                자동 메모 활성화
+              </label>
+            </div>
           </div>
         ) : (
           <>
@@ -306,11 +433,26 @@ const App: React.FC = () => {
               <div className="hints-remaining">남은 힌트: {gameState.hintsRemaining}</div>
             </div>
             
-            <Grid
-              grid={gameState.grid}
-              selectedCell={gameState.selectedCell}
-              onCellClick={handleCellClick}
-            />
+            <div className="game-controls">
+              <button onClick={togglePause}>
+                {gameState.isPaused ? '게임 재개' : '일시정지'}
+              </button>
+              <button onClick={toggleAutoNotes}>
+                {autoNotesEnabled ? '자동 메모 끄기' : '자동 메모 켜기'}
+              </button>
+            </div>
+            
+            {gameState.isPaused ? (
+              <div className="message">
+                게임이 일시정지되었습니다. '게임 재개' 버튼을 클릭하여 계속하세요.
+              </div>
+            ) : (
+              <Grid
+                grid={gameState.grid}
+                selectedCell={gameState.selectedCell}
+                onCellClick={handleCellClick}
+              />
+            )}
             
             {gameState.isComplete && (
               <div className="message success-message">
@@ -334,6 +476,7 @@ const App: React.FC = () => {
               timer={gameState.timer}
               hintsRemaining={gameState.hintsRemaining}
               isGameOver={gameState.isComplete || gameState.isFailed}
+              isPaused={gameState.isPaused}
             />
             
             {(gameState.isComplete || gameState.isFailed) && (

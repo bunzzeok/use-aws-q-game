@@ -3,14 +3,18 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .App-header {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .App-header h1 {
-  color: #333;
+  color: var(--header-color);
   font-size: 32px;
 }
 
@@ -32,17 +36,17 @@
 
 .timer, .error-count, .hints-remaining {
   padding: 8px 12px;
-  background-color: #f5f5f5;
+  background-color: var(--info-bg);
   border-radius: 4px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--info-border);
 }
 
 .error-count {
-  color: #d32f2f;
+  color: var(--error-count-color);
 }
 
 .hints-remaining {
-  color: #1976d2;
+  color: var(--hints-color);
 }
 
 .message {
@@ -55,15 +59,15 @@
 }
 
 .success-message {
-  background-color: #dff0d8;
-  color: #3c763d;
-  border: 1px solid #d6e9c6;
+  background-color: var(--success-bg);
+  color: var(--success-color);
+  border: 1px solid var(--success-border);
 }
 
 .fail-message {
-  background-color: #f2dede;
-  color: #a94442;
-  border: 1px solid #ebccd1;
+  background-color: var(--fail-bg);
+  color: var(--fail-color);
+  border: 1px solid var(--fail-border);
 }
 
 .start-screen {
@@ -76,18 +80,19 @@
 
 .start-screen h2 {
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-color);
 }
 
 .difficulty-buttons {
   display: flex;
   gap: 20px;
+  margin-bottom: 20px;
 }
 
 .difficulty-buttons button {
   padding: 15px 30px;
   font-size: 18px;
-  background-color: #4caf50;
+  background-color: var(--button-primary-bg);
   color: white;
   border: none;
   border-radius: 5px;
@@ -96,14 +101,14 @@
 }
 
 .difficulty-buttons button:hover {
-  background-color: #45a049;
+  background-color: var(--button-primary-hover);
 }
 
 .new-game-button {
   margin-top: 20px;
   padding: 12px 24px;
   font-size: 16px;
-  background-color: #2196f3;
+  background-color: var(--button-secondary-bg);
   color: white;
   border: none;
   border-radius: 4px;
@@ -112,7 +117,50 @@
 }
 
 .new-game-button:hover {
-  background-color: #0b7dda;
+  background-color: var(--button-secondary-hover);
+}
+
+.game-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+}
+
+.game-controls button {
+  padding: 8px 16px;
+  background-color: var(--button-secondary-bg);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.game-controls button:hover {
+  background-color: var(--button-secondary-hover);
+}
+
+.options {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.auto-notes-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.auto-notes-toggle input {
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
@@ -134,5 +182,10 @@
   
   .game-info {
     font-size: 14px;
+  }
+  
+  .difficulty-buttons {
+    flex-direction: column;
+    gap: 10px;
   }
 }

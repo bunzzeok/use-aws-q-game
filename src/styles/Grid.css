@@ -1,9 +1,10 @@
 .sudoku-grid {
   display: flex;
   flex-direction: column;
-  border: 3px solid #333;
+  border: 3px solid var(--cell-border-thick);
   width: fit-content;
   margin: 0 auto;
+  transition: border-color 0.3s;
 }
 
 .grid-row {

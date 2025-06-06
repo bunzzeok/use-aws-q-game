@@ -12,6 +12,7 @@ interface ControlsProps {
   timer: number;
   hintsRemaining: number;
   isGameOver: boolean;
+  isPaused?: boolean;
 }
 
 const Controls: React.FC<ControlsProps> = ({
@@ -22,7 +23,8 @@ const Controls: React.FC<ControlsProps> = ({
   onHintClick,
   isNotesMode,
   hintsRemaining,
-  isGameOver
+  isGameOver,
+  isPaused = false
 }) => {
   return (
     <div className="controls">
@@ -31,7 +33,7 @@ const Controls: React.FC<ControlsProps> = ({
           <button 
             key={num} 
             onClick={() => onNumberClick(num)}
-            disabled={isGameOver}
+            disabled={isGameOver || isPaused}
           >
             {num}
           </button>
@@ -42,19 +44,19 @@ const Controls: React.FC<ControlsProps> = ({
         <button 
           className={`notes-button ${isNotesMode ? 'active' : ''}`} 
           onClick={onNotesToggle}
-          disabled={isGameOver}
+          disabled={isGameOver || isPaused}
         >
           메모
         </button>
         <button 
           onClick={onEraseClick}
-          disabled={isGameOver}
+          disabled={isGameOver || isPaused}
         >
           지우기
         </button>
         <button 
           onClick={onHintClick}
-          disabled={hintsRemaining <= 0 || isGameOver}
+          disabled={hintsRemaining <= 0 || isGameOver || isPaused}
           className={hintsRemaining <= 0 ? 'disabled' : ''}
         >
           힌트 ({hintsRemaining})

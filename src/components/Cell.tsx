@@ -8,6 +8,8 @@ interface CellProps {
   colIndex: number;
   isSelected: boolean;
   onCellClick: (row: number, col: number) => void;
+  sameNumber?: boolean;
+  samePosition?: boolean;
 }
 
 const Cell: React.FC<CellProps> = ({ 
@@ -15,7 +17,9 @@ const Cell: React.FC<CellProps> = ({
   rowIndex, 
   colIndex, 
   isSelected, 
-  onCellClick 
+  onCellClick,
+  sameNumber = false,
+  samePosition = false
 }) => {
   const { value, isInitial, isValid, notes } = cellState;
   
@@ -27,6 +31,8 @@ const Cell: React.FC<CellProps> = ({
     ${isInitial ? 'initial' : ''}
     ${rowIndex % 3 === 2 && rowIndex !== 8 ? 'border-bottom' : ''}
     ${colIndex % 3 === 2 && colIndex !== 8 ? 'border-right' : ''}
+    ${sameNumber ? 'same-number' : ''}
+    ${samePosition ? 'same-position' : ''}
   `;
 
   // 노트 렌더링
