@@ -1,0 +1,101 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-color, white);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 90%;
+}
+
+.auto-save-modal h2 {
+  margin-top: 0;
+  color: var(--text-color, #333);
+  border-bottom: 1px solid var(--border-color, #eee);
+  padding-bottom: 10px;
+}
+
+.auto-save-message {
+  margin: 20px 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color, #333);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-button,
+.load-button,
+.delete-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-button {
+  background-color: var(--cancel-button-bg, #f5f5f5);
+  color: var(--cancel-button-text, #333);
+}
+
+.load-button {
+  background-color: var(--load-button-bg, #4a90e2);
+  color: var(--load-button-text, white);
+}
+
+.delete-button {
+  background-color: var(--delete-button-bg, #f44336);
+  color: var(--delete-button-text, white);
+}
+
+.cancel-button:hover {
+  background-color: var(--cancel-button-hover-bg, #e0e0e0);
+}
+
+.load-button:hover {
+  background-color: var(--load-button-hover-bg, #357abd);
+}
+
+.delete-button:hover {
+  background-color: var(--delete-button-hover-bg, #d32f2f);
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .auto-save-modal {
+    --bg-color: #2d2d2d;
+    --text-color: #e0e0e0;
+    --border-color: #444;
+    
+    --cancel-button-bg: #444;
+    --cancel-button-text: #e0e0e0;
+    --cancel-button-hover-bg: #555;
+    
+    --load-button-bg: #3a7bc8;
+    --load-button-text: white;
+    --load-button-hover-bg: #2a6db8;
+    
+    --delete-button-bg: #c62828;
+    --delete-button-text: white;
+    --delete-button-hover-bg: #b71c1c;
+  }
+}

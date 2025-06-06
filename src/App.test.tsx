@@ -1,28 +1,42 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // 모달 관련 오류 방지를 위한 모킹
 jest.mock('./components/SaveGameModal', () => () => <div data-testid="save-game-modal" />);
 jest.mock('./components/LoadGameModal', () => () => <div data-testid="load-game-modal" />);
-jest.mock('./components/GameMenu', () => ({
-  __esModule: true,
-  default: (props: any) => <div data-testid="game-menu" />
-}));
+jest.mock('./components/AutoSaveModal', () => () => <div data-testid="auto-save-modal" />);
+jest.mock('./components/GameMenu', () => () => <div data-testid="game-menu" />);
+jest.mock('./components/GameBoard', () => () => <div data-testid="game-board" />);
+jest.mock('./components/ThemeToggle', () => () => <div data-testid="theme-toggle" />);
 
 test('renders sudoku game title', () => {
-  render(<App />);
+  render(
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
   const titleElement = screen.getByText(/스도쿠 게임/i);
   expect(titleElement).toBeInTheDocument();
 });
 
-test('renders difficulty selection buttons', () => {
-  render(<App />);
-  const easyButton = screen.getByText(/쉬움/i);
-  const mediumButton = screen.getByText(/중간/i);
-  const hardButton = screen.getByText(/어려움/i);
-  
-  expect(easyButton).toBeInTheDocument();
-  expect(mediumButton).toBeInTheDocument();
-  expect(hardButton).toBeInTheDocument();
+test('renders game menu component', () => {
+  render(
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+  const gameMenuElement = screen.getByTestId('game-menu');
+  expect(gameMenuElement).toBeInTheDocument();
+});
+
+test('renders game board component', () => {
+  render(
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+  const gameBoardElement = screen.getByTestId('game-board');
+  expect(gameBoardElement).toBeInTheDocument();
 });

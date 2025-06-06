@@ -1,0 +1,172 @@
+.start-screen {
+  text-align: center;
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.start-screen h2 {
+  margin-bottom: 20px;
+  color: var(--text-color, #333);
+}
+
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.difficulty-buttons button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.difficulty-buttons button:nth-child(1) {
+  background-color: var(--easy-button-bg, #4caf50);
+  color: white;
+}
+
+.difficulty-buttons button:nth-child(2) {
+  background-color: var(--medium-button-bg, #ff9800);
+  color: white;
+}
+
+.difficulty-buttons button:nth-child(3) {
+  background-color: var(--hard-button-bg, #f44336);
+  color: white;
+}
+
+.difficulty-buttons button:hover {
+  transform: translateY(-2px);
+}
+
+.difficulty-buttons button:active {
+  transform: translateY(0);
+}
+
+.options {
+  margin-top: 20px;
+}
+
+.auto-notes-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text-color, #333);
+}
+
+.auto-notes-toggle input {
+  cursor: pointer;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  background-color: var(--info-bg-color, #f5f5f5);
+  border-radius: 4px;
+  color: var(--text-color, #333);
+}
+
+.game-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.game-controls button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--control-button-bg, #4a90e2);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.game-controls button:hover {
+  background-color: var(--control-button-hover-bg, #357abd);
+}
+
+.message {
+  margin: 15px 0;
+  padding: 10px 15px;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 500;
+  background-color: var(--message-bg, #f5f5f5);
+  color: var(--text-color, #333);
+}
+
+.success-message {
+  background-color: var(--success-message-bg, #e8f5e9);
+  color: var(--success-message-text, #2e7d32);
+}
+
+.fail-message {
+  background-color: var(--fail-message-bg, #ffebee);
+  color: var(--fail-message-text, #c62828);
+}
+
+.new-game-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--new-game-button-bg, #4caf50);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.new-game-button:hover {
+  background-color: var(--new-game-button-hover-bg, #43a047);
+}
+
+/* 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .start-screen h2 {
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .auto-notes-toggle {
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .game-info {
+    background-color: var(--info-bg-color, #333);
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .message {
+    background-color: var(--message-bg, #333);
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .success-message {
+    background-color: var(--success-message-bg, #1b5e20);
+    color: var(--success-message-text, #a5d6a7);
+  }
+  
+  .fail-message {
+    background-color: var(--fail-message-bg, #b71c1c);
+    color: var(--fail-message-text, #ffcdd2);
+  }
+}

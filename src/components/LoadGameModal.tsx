@@ -128,11 +128,11 @@ const LoadGameModal: React.FC<LoadGameModalProps> = ({
 };
 
 // 난이도 텍스트 변환
-function getDifficultyText(difficulty: number): string {
+function getDifficultyText(difficulty: string): string {
   switch (difficulty) {
-    case 0: return '쉬움';
-    case 1: return '중간';
-    case 2: return '어려움';
+    case 'easy': return '쉬움';
+    case 'medium': return '중간';
+    case 'hard': return '어려움';
     default: return '알 수 없음';
   }
 }
