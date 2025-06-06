@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Achievement, AchievementCategory } from '../utils/achievements/achievementData';
-import { AchievementManager } from '../utils/achievements/achievementManager';
+import '../styles/Modal.css';
 import '../styles/AchievementsModal.css';
 
 interface AchievementsModalProps {
@@ -159,10 +159,10 @@ const AchievementsModal: React.FC<AchievementsModalProps> = ({
         </div>
         
         <div className="modal-actions">
-          <button className="reset-button" onClick={handleResetAchievements}>
+          <button className="modal-button danger-button" onClick={handleResetAchievements}>
             업적 초기화
           </button>
-          <button className="close-button" onClick={onClose}>
+          <button className="modal-button secondary-button" onClick={onClose}>
             닫기
           </button>
         </div>
