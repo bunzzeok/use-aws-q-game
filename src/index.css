@@ -5,9 +5,106 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-color, #ffffff);
+  color: var(--text-color, #333333);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* 라이트 모드 (기본) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --header-color: #2c3e50;
+  --border-color: #dddddd;
+  
+  --info-bg: #f5f5f5;
+  --info-border: #e0e0e0;
+  --error-count-color: #e53935;
+  --hints-color: #2196f3;
+  
+  --success-bg: #e8f5e9;
+  --success-color: #2e7d32;
+  --success-border: #c8e6c9;
+  
+  --fail-bg: #ffebee;
+  --fail-color: #c62828;
+  --fail-border: #ffcdd2;
+  
+  --button-primary-bg: #4a90e2;
+  --button-primary-hover: #357abd;
+  --button-secondary-bg: #4caf50;
+  --button-secondary-hover: #43a047;
+  
+  --cell-bg: #ffffff;
+  --cell-border: #bbbbbb;
+  --cell-selected-bg: #bbdefb;
+  --cell-initial-bg: #f5f5f5;
+  --cell-invalid-bg: #ffcdd2;
+  --cell-highlight-bg: #e3f2fd;
+  --cell-text: #333333;
+  --cell-initial-text: #000000;
+  --cell-notes-text: #757575;
+  
+  --modal-overlay-bg: rgba(0, 0, 0, 0.5);
+  --modal-bg: #ffffff;
+  --modal-border: #e0e0e0;
+  
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --input-text: #333333;
+  
+  --disabled-bg: #e0e0e0;
+  --disabled-text: #9e9e9e;
+}
+
+/* 다크 모드 */
+.dark-theme {
+  --bg-color: #121212;
+  --text-color: #e0e0e0;
+  --header-color: #90caf9;
+  --border-color: #424242;
+  
+  --info-bg: #2d2d2d;
+  --info-border: #424242;
+  --error-count-color: #ef5350;
+  --hints-color: #64b5f6;
+  
+  --success-bg: #1b5e20;
+  --success-color: #a5d6a7;
+  --success-border: #2e7d32;
+  
+  --fail-bg: #b71c1c;
+  --fail-color: #ffcdd2;
+  --fail-border: #c62828;
+  
+  --button-primary-bg: #3a7bc8;
+  --button-primary-hover: #2a6db8;
+  --button-secondary-bg: #388e3c;
+  --button-secondary-hover: #2e7d32;
+  
+  --cell-bg: #2d2d2d;
+  --cell-border: #424242;
+  --cell-selected-bg: #1a3f5f;
+  --cell-initial-bg: #3d3d3d;
+  --cell-invalid-bg: #b71c1c;
+  --cell-highlight-bg: #1a3f5f;
+  --cell-text: #e0e0e0;
+  --cell-initial-text: #ffffff;
+  --cell-notes-text: #9e9e9e;
+  
+  --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+  --modal-bg: #2d2d2d;
+  --modal-border: #424242;
+  
+  --input-bg: #3d3d3d;
+  --input-border: #424242;
+  --input-text: #e0e0e0;
+  
+  --disabled-bg: #424242;
+  --disabled-text: #757575;
 }

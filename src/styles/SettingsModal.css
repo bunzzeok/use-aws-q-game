@@ -33,14 +33,3 @@
 .close-button:hover {
   background-color: var(--secondary-button-hover-bg, #e0e0e0);
 }
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .settings-modal {
-    --text-color: #e0e0e0;
-    --border-color: #444;
-    --secondary-button-bg: #444;
-    --secondary-button-text: #e0e0e0;
-    --secondary-button-hover-bg: #555;
-  }
-}

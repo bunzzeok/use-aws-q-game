@@ -1,0 +1,27 @@
+.theme-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 24px;
+  color: var(--header-color, #2c3e50);
+  transition: color 0.3s, transform 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--theme-toggle-hover, #4a90e2);
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

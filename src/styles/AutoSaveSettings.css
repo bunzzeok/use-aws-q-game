@@ -38,13 +38,13 @@
   padding: 4px 8px;
   border-radius: 4px;
   border: 1px solid var(--border-color, #ddd);
-  background-color: var(--input-bg-color, white);
-  color: var(--text-color, #333);
+  background-color: var(--input-bg, #ffffff);
+  color: var(--input-text, #333333);
   cursor: pointer;
 }
 
 .setting-label select:disabled {
-  background-color: var(--disabled-bg-color, #eee);
+  background-color: var(--disabled-bg, #eeeeee);
   cursor: not-allowed;
 }
 
@@ -76,18 +76,4 @@
 
 .save-now-button:hover {
   background-color: var(--primary-button-hover-bg, #357abd);
-}
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .auto-save-settings {
-    --secondary-bg-color: #333;
-    --text-color: #e0e0e0;
-    --border-color: #444;
-    --input-bg-color: #444;
-    --disabled-bg-color: #2a2a2a;
-    --secondary-text-color: #aaa;
-    --primary-button-bg: #3a7bc8;
-    --primary-button-hover-bg: #2a6db8;
-  }
 }

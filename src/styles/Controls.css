@@ -18,7 +18,7 @@
 
 .difficulty-controls button {
   padding: 8px 16px;
-  background-color: var(--button-primary-bg);
+  background-color: var(--button-primary-bg, #4a90e2);
   color: white;
   border: none;
   border-radius: 4px;
@@ -28,7 +28,7 @@
 }
 
 .difficulty-controls button:hover {
-  background-color: var(--button-primary-hover);
+  background-color: var(--button-primary-hover, #357abd);
 }
 
 .number-pad {
@@ -43,19 +43,20 @@
   width: 40px;
   height: 40px;
   font-size: 18px;
-  background-color: var(--number-pad-bg);
-  border: 1px solid var(--number-pad-border);
+  background-color: var(--number-pad-bg, #f5f5f5);
+  color: var(--number-pad-text, #333333);
+  border: 1px solid var(--number-pad-border, #dddddd);
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .number-pad button:hover:not(:disabled) {
-  background-color: var(--number-pad-hover);
+  background-color: var(--number-pad-hover, #e0e0e0);
 }
 
 .number-pad button:disabled {
-  opacity: var(--disabled-opacity);
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -68,7 +69,7 @@
 
 .action-buttons button {
   padding: 8px 16px;
-  background-color: var(--button-secondary-bg);
+  background-color: var(--button-secondary-bg, #4caf50);
   color: white;
   border: none;
   border-radius: 4px;
@@ -79,24 +80,48 @@
 }
 
 .action-buttons button:hover:not(:disabled) {
-  background-color: var(--button-secondary-hover);
+  background-color: var(--button-secondary-hover, #43a047);
 }
 
 .action-buttons button:disabled {
-  opacity: var(--disabled-opacity);
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
+.erase-button {
+  background-color: var(--button-erase-bg, #f44336) !important;
+}
+
+.erase-button:hover:not(:disabled) {
+  background-color: var(--button-erase-hover, #e53935) !important;
+}
+
+.notes-button {
+  background-color: var(--button-notes-bg, #ff9800) !important;
+}
+
+.notes-button:hover:not(:disabled) {
+  background-color: var(--button-notes-hover, #f57c00) !important;
+}
+
 .notes-button.active {
-  background-color: var(--button-notes-active);
+  background-color: var(--button-notes-active, #ff5722) !important;
 }
 
 .notes-button.active:hover:not(:disabled) {
-  background-color: var(--button-notes-hover);
+  background-color: var(--button-notes-active-hover, #e64a19) !important;
+}
+
+.hint-button {
+  background-color: var(--button-hint-bg, #2196f3) !important;
+}
+
+.hint-button:hover:not(:disabled) {
+  background-color: var(--button-hint-hover, #1976d2) !important;
 }
 
 .disabled {
-  opacity: var(--disabled-opacity);
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -110,7 +135,7 @@
 
 .game-controls button {
   padding: 8px 16px;
-  background-color: var(--button-secondary-bg);
+  background-color: var(--button-secondary-bg, #4caf50);
   color: white;
   border: none;
   border-radius: 4px;
@@ -119,10 +144,10 @@
 }
 
 .game-controls button:hover:not(:disabled) {
-  background-color: var(--button-secondary-hover);
+  background-color: var(--button-secondary-hover, #43a047);
 }
 
 .game-controls button:disabled {
-  opacity: var(--disabled-opacity);
+  opacity: 0.5;
   cursor: not-allowed;
 }

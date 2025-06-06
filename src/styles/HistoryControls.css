@@ -41,13 +41,3 @@
 .button-text {
   font-weight: 500;
 }
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .history-button {
-    --button-bg-color: #3a7bc8;
-    --button-hover-bg-color: #2a6db8;
-    --button-disabled-bg-color: #444444;
-    --button-disabled-text-color: #999999;
-  }
-}

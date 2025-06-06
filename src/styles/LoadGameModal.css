@@ -150,28 +150,3 @@
   justify-content: flex-end;
   margin-top: 20px;
 }
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .load-game-modal {
-    --bg-color: #2d2d2d;
-    --text-color: #e0e0e0;
-    --secondary-text-color: #aaa;
-    --border-color: #444;
-    --highlight-bg-color: #1a3f5f;
-    --item-bg-color: #3d3d3d;
-    --item-hover-bg-color: #4d4d4d;
-    --primary-button-bg: #3a7bc8;
-    --primary-button-hover-bg: #2a6db8;
-    --primary-button-text: white;
-    --delete-button-bg: #444;
-    --delete-button-text: #e0e0e0;
-    --delete-button-hover-bg: #555;
-    --delete-confirm-bg: #c62828;
-    --delete-confirm-hover-bg: #b71c1c;
-    --delete-confirm-text: white;
-    --secondary-button-bg: #444;
-    --secondary-button-text: #e0e0e0;
-    --secondary-button-hover-bg: #555;
-  }
-}

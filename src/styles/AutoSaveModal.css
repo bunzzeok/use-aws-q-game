@@ -78,24 +78,3 @@
 .delete-button:hover {
   background-color: var(--delete-button-hover-bg, #d32f2f);
 }
-
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .auto-save-modal {
-    --bg-color: #2d2d2d;
-    --text-color: #e0e0e0;
-    --border-color: #444;
-    
-    --cancel-button-bg: #444;
-    --cancel-button-text: #e0e0e0;
-    --cancel-button-hover-bg: #555;
-    
-    --load-button-bg: #3a7bc8;
-    --load-button-text: white;
-    --load-button-hover-bg: #2a6db8;
-    
-    --delete-button-bg: #c62828;
-    --delete-button-text: white;
-    --delete-button-hover-bg: #b71c1c;
-  }
-}

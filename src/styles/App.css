@@ -3,9 +3,10 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color, #ffffff);
+  color: var(--text-color, #333333);
   transition: background-color 0.3s, color 0.3s;
+  min-height: 100vh;
 }
 
 .App-header {
@@ -14,8 +15,9 @@
 }
 
 .App-header h1 {
-  color: var(--header-color);
+  color: var(--header-color, #2c3e50);
   font-size: 32px;
+  margin-top: 0;
 }
 
 .game-container {
@@ -36,17 +38,17 @@
 
 .timer, .error-count, .hints-remaining {
   padding: 8px 12px;
-  background-color: var(--info-bg);
+  background-color: var(--info-bg, #f5f5f5);
   border-radius: 4px;
-  border: 1px solid var(--info-border);
+  border: 1px solid var(--info-border, #e0e0e0);
 }
 
 .error-count {
-  color: var(--error-count-color);
+  color: var(--error-count-color, #e53935);
 }
 
 .hints-remaining {
-  color: var(--hints-color);
+  color: var(--hints-color, #2196f3);
 }
 
 .message {
@@ -59,15 +61,15 @@
 }
 
 .success-message {
-  background-color: var(--success-bg);
-  color: var(--success-color);
-  border: 1px solid var(--success-border);
+  background-color: var(--success-bg, #e8f5e9);
+  color: var(--success-color, #2e7d32);
+  border: 1px solid var(--success-border, #c8e6c9);
 }
 
 .fail-message {
-  background-color: var(--fail-bg);
-  color: var(--fail-color);
-  border: 1px solid var(--fail-border);
+  background-color: var(--fail-bg, #ffebee);
+  color: var(--fail-color, #c62828);
+  border: 1px solid var(--fail-border, #ffcdd2);
 }
 
 .start-screen {
@@ -80,35 +82,63 @@
 
 .start-screen h2 {
   margin-bottom: 30px;
-  color: var(--text-color);
+  color: var(--text-color, #333333);
 }
 
 .difficulty-buttons {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  gap: 15px;
   margin-bottom: 20px;
+  width: 100%;
+  max-width: 300px;
 }
 
 .difficulty-buttons button {
   padding: 15px 30px;
   font-size: 18px;
-  background-color: var(--button-primary-bg);
+  background-color: var(--button-primary-bg, #4a90e2);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .difficulty-buttons button:hover {
-  background-color: var(--button-primary-hover);
+  background-color: var(--button-primary-hover, #357abd);
+  transform: translateY(-2px);
+}
+
+.difficulty-buttons button:nth-child(1) {
+  background-color: var(--button-easy-bg, #4caf50);
+}
+
+.difficulty-buttons button:nth-child(1):hover {
+  background-color: var(--button-easy-hover, #43a047);
+}
+
+.difficulty-buttons button:nth-child(2) {
+  background-color: var(--button-medium-bg, #ff9800);
+}
+
+.difficulty-buttons button:nth-child(2):hover {
+  background-color: var(--button-medium-hover, #f57c00);
+}
+
+.difficulty-buttons button:nth-child(3) {
+  background-color: var(--button-hard-bg, #f44336);
+}
+
+.difficulty-buttons button:nth-child(3):hover {
+  background-color: var(--button-hard-hover, #e53935);
 }
 
 .new-game-button {
   margin-top: 20px;
   padding: 12px 24px;
   font-size: 16px;
-  background-color: var(--button-secondary-bg);
+  background-color: var(--button-secondary-bg, #4caf50);
   color: white;
   border: none;
   border-radius: 4px;
@@ -117,7 +147,7 @@
 }
 
 .new-game-button:hover {
-  background-color: var(--button-secondary-hover);
+  background-color: var(--button-secondary-hover, #43a047);
 }
 
 .game-controls {
@@ -131,7 +161,7 @@
 
 .game-controls button {
   padding: 8px 16px;
-  background-color: var(--button-secondary-bg);
+  background-color: var(--button-secondary-bg, #4caf50);
   color: white;
   border: none;
   border-radius: 4px;
@@ -140,7 +170,7 @@
 }
 
 .game-controls button:hover {
-  background-color: var(--button-secondary-hover);
+  background-color: var(--button-secondary-hover, #43a047);
 }
 
 .options {
@@ -157,6 +187,7 @@
   gap: 8px;
   cursor: pointer;
   user-select: none;
+  color: var(--text-color, #333333);
 }
 
 .auto-notes-toggle input {
@@ -182,10 +213,5 @@
   
   .game-info {
     font-size: 14px;
-  }
-  
-  .difficulty-buttons {
-    flex-direction: column;
-    gap: 10px;
   }
 }
