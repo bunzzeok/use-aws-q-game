@@ -61,7 +61,7 @@ code {
   --cell-border: #bdbdbd;
   --cell-selected-bg: #e3f2fd;
   --cell-initial-bg: #f5f5f5;
-  --cell-invalid-bg: #ffebee;
+  --cell-invalid-bg: #ffcdd2;
   --cell-highlight-bg: #f3e5f5;
   --cell-text: #212121;
   --cell-initial-text: #212121;
@@ -172,7 +172,7 @@ code {
   --cell-border: #444444;
   --cell-selected-bg: #3a2f45;
   --cell-initial-bg: #2a2a2a;
-  --cell-invalid-bg: #3e0a0a;
+  --cell-invalid-bg: #5c1010;
   --cell-highlight-bg: #2c2c3a;
   --cell-text: #ffffff;
   --cell-initial-text: #ffffff;

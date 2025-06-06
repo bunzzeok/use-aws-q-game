@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CellValue } from '../types/index';
 
 interface CellProps {
@@ -20,6 +20,17 @@ const Cell: React.FC<CellProps> = ({
   isInvalid,
   onClick
 }) => {
+  const cellRef = useRef<HTMLDivElement>(null);
+  
+  // 셀이 invalid 상태가 되면 애니메이션 효과를 위해 클래스를 재적용
+  useEffect(() => {
+    if (isInvalid && cellRef.current) {
+      cellRef.current.classList.remove('invalid');
+      void cellRef.current.offsetWidth; // 강제 리플로우
+      cellRef.current.classList.add('invalid');
+    }
+  }, [isInvalid, value]);
+
   const classNames = [
     'cell',
     isSelected ? 'selected' : '',
@@ -29,7 +40,7 @@ const Cell: React.FC<CellProps> = ({
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={classNames} onClick={onClick}>
+    <div ref={cellRef} className={classNames} onClick={onClick}>
       {value === 0 || value === null ? (
         notes.length > 0 && (
           <div className="notes-container">

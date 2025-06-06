@@ -25,7 +25,7 @@
   color: var(--cell-text);
   position: relative;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -43,13 +43,14 @@
 
 .cell.invalid {
   background-color: var(--cell-invalid-bg);
+  color: white;
   animation: shake 0.4s ease-in-out;
 }
 
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-2px); }
-  40%, 80% { transform: translateX(2px); }
+  20%, 60% { transform: translateX(-3px); }
+  40%, 80% { transform: translateX(3px); }
 }
 
 .cell.highlighted {
@@ -67,6 +68,7 @@
 
 .cell.highlighted.invalid {
   background-color: var(--cell-invalid-bg);
+  color: white;
 }
 
 /* 3x3 박스 테두리 강조 */
