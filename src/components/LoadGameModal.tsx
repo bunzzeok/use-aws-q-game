@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GameStorage, SavedGameInfo } from '../utils/storage/gameStorage';
+import '../styles/Modal.css';
 import '../styles/LoadGameModal.css';
 
 interface LoadGameModalProps {
@@ -73,11 +74,11 @@ const LoadGameModal: React.FC<LoadGameModalProps> = ({
           <div className="auto-save-section">
             <h3>자동 저장된 게임</h3>
             <div className="auto-save-actions">
-              <button className="load-button" onClick={handleLoadAutoSave}>
+              <button className="modal-button primary-button" onClick={handleLoadAutoSave}>
                 불러오기
               </button>
               <button 
-                className={`delete-button ${confirmDelete === 'auto' ? 'confirm' : ''}`}
+                className={`modal-button ${confirmDelete === 'auto' ? 'danger-button' : 'secondary-button'}`}
                 onClick={handleDeleteAutoSave}
               >
                 {confirmDelete === 'auto' ? '삭제 확인' : '삭제'}
@@ -92,22 +93,24 @@ const LoadGameModal: React.FC<LoadGameModalProps> = ({
           {savedGames.length === 0 ? (
             <p className="no-games-message">저장된 게임이 없습니다.</p>
           ) : (
-            <ul>
+            <ul className="games-list">
               {savedGames.map((game) => (
                 <li key={game.id} className="saved-game-item">
                   <div className="game-info">
                     <h4>{game.name}</h4>
-                    <p>난이도: {getDifficultyText(game.difficulty)}</p>
-                    <p>저장 시간: {new Date(game.timestamp).toLocaleString()}</p>
-                    <p>진행 시간: {formatTime(game.timer)}</p>
-                    <p>완료율: {game.completionPercentage}%</p>
+                    <div className="game-details">
+                      <p>난이도: {getDifficultyText(game.difficulty)}</p>
+                      <p>저장 시간: {new Date(game.timestamp).toLocaleString()}</p>
+                      <p>진행 시간: {formatTime(game.timer)}</p>
+                      <p>완료율: {game.completionPercentage}%</p>
+                    </div>
                   </div>
                   <div className="game-actions">
-                    <button className="load-button" onClick={() => handleLoad(game.id)}>
+                    <button className="modal-button primary-button" onClick={() => handleLoad(game.id)}>
                       불러오기
                     </button>
                     <button 
-                      className={`delete-button ${confirmDelete === game.id ? 'confirm' : ''}`}
+                      className={`modal-button ${confirmDelete === game.id ? 'danger-button' : 'secondary-button'}`}
                       onClick={() => handleDelete(game.id)}
                     >
                       {confirmDelete === game.id ? '삭제 확인' : '삭제'}
@@ -120,7 +123,7 @@ const LoadGameModal: React.FC<LoadGameModalProps> = ({
         </div>
         
         <div className="modal-actions">
-          <button className="close-button" onClick={onClose}>닫기</button>
+          <button className="modal-button secondary-button" onClick={onClose}>닫기</button>
         </div>
       </div>
     </div>

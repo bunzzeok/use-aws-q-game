@@ -1,6 +1,7 @@
 import React from 'react';
 import { GameStatistics } from '../utils/statistics/gameStatistics';
 import { Difficulty } from '../types';
+import '../styles/Modal.css';
 import '../styles/StatisticsModal.css';
 
 interface StatisticsModalProps {
@@ -77,24 +78,26 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
         
         <div className="statistics-section">
           <h3>최고 기록</h3>
-          <table className="statistics-table">
-            <thead>
-              <tr>
-                <th>난이도</th>
-                <th>최고 시간</th>
-                <th>평균 시간</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.values(Difficulty).map((difficulty) => (
-                <tr key={difficulty}>
-                  <td>{getDifficultyText(difficulty)}</td>
-                  <td>{formatTime(statistics.bestTimes[difficulty])}</td>
-                  <td>{formatTime(statistics.averageTimes[difficulty])}</td>
+          <div className="table-container">
+            <table className="statistics-table">
+              <thead>
+                <tr>
+                  <th>난이도</th>
+                  <th>최고 시간</th>
+                  <th>평균 시간</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {Object.values(Difficulty).map((difficulty) => (
+                  <tr key={difficulty}>
+                    <td>{getDifficultyText(difficulty)}</td>
+                    <td>{formatTime(statistics.bestTimes[difficulty])}</td>
+                    <td>{formatTime(statistics.averageTimes[difficulty])}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         
         <div className="statistics-section">
@@ -116,10 +119,10 @@ const StatisticsModal: React.FC<StatisticsModalProps> = ({
         </div>
         
         <div className="modal-actions">
-          <button className="reset-button" onClick={handleResetStatistics}>
+          <button className="modal-button danger-button" onClick={handleResetStatistics}>
             통계 초기화
           </button>
-          <button className="close-button" onClick={onClose}>
+          <button className="modal-button secondary-button" onClick={onClose}>
             닫기
           </button>
         </div>

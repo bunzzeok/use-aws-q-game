@@ -5,6 +5,7 @@ import HistoryControls from './HistoryControls';
 import { GameState } from '../types/index';
 import { getUsedNumbers } from '../utils/sudokuUtils';
 import { Difficulty } from '../types/index';
+import '../styles/GameBoard.css';
 
 interface GameBoardProps {
   gameState: GameState;
@@ -73,9 +74,15 @@ const GameBoard: React.FC<GameBoardProps> = ({
       </div>
 
       {gameState.isPaused && (
-        <button className="new-game-button ripple" onClick={onTogglePause}>
-          게임 재개
-        </button>
+        <div className="pause-overlay">
+          <div className="pause-content">
+            <h2>게임 일시정지</h2>
+            <p>게임을 계속하려면 아래 버튼을 클릭하세요</p>
+            <button className="modal-button primary-button ripple" onClick={onTogglePause}>
+              게임 재개
+            </button>
+          </div>
+        </div>
       )}
 
       {!gameState.isPaused && (
@@ -128,7 +135,10 @@ const GameBoard: React.FC<GameBoardProps> = ({
                   자동 메모 기능
                 </label>
 
-                <button className="new-game-button ripple" onClick={onTogglePause}>
+                <button className="pause-button ripple" onClick={onTogglePause}>
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
                   게임 일시정지
                 </button>
               </div>

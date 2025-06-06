@@ -1,172 +1,75 @@
-.start-screen {
-  text-align: center;
-  padding: 20px;
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-.start-screen h2 {
-  margin-bottom: 20px;
-  color: var(--text-color, #333);
-}
-
-.difficulty-buttons {
+.pause-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-overlay-bg);
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  animation: fade-in 0.3s ease-out;
 }
 
-.difficulty-buttons button {
-  padding: 12px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s, transform 0.1s;
+.pause-content {
+  background-color: var(--modal-bg);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  animation: scale-in 0.3s ease-out;
 }
 
-.difficulty-buttons button:nth-child(1) {
-  background-color: var(--easy-button-bg, #4caf50);
-  color: white;
+.pause-content h2 {
+  margin-top: 0;
+  color: var(--text-color);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
-.difficulty-buttons button:nth-child(2) {
-  background-color: var(--medium-button-bg, #ff9800);
-  color: white;
+.pause-content p {
+  margin-bottom: 24px;
+  color: var(--secondary-text-color);
 }
 
-.difficulty-buttons button:nth-child(3) {
-  background-color: var(--hard-button-bg, #f44336);
-  color: white;
-}
-
-.difficulty-buttons button:hover {
-  transform: translateY(-2px);
-}
-
-.difficulty-buttons button:active {
-  transform: translateY(0);
-}
-
-.options {
-  margin-top: 20px;
-}
-
-.auto-notes-toggle {
+.pause-button {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  cursor: pointer;
-  color: var(--text-color, #333);
-}
-
-.auto-notes-toggle input {
-  cursor: pointer;
-}
-
-.game-board {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.game-info {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 500px;
-  padding: 10px;
-  background-color: var(--info-bg-color, #f5f5f5);
-  border-radius: 4px;
-  color: var(--text-color, #333);
-}
-
-.game-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.game-controls button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--control-button-bg, #4a90e2);
+  padding: 10px 16px;
+  background-color: var(--button-primary-bg);
   color: white;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.game-controls button:hover {
-  background-color: var(--control-button-hover-bg, #357abd);
-}
-
-.message {
-  margin: 15px 0;
-  padding: 10px 15px;
-  border-radius: 4px;
-  text-align: center;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 500;
-  background-color: var(--message-bg, #f5f5f5);
-  color: var(--text-color, #333);
-}
-
-.success-message {
-  background-color: var(--success-message-bg, #e8f5e9);
-  color: var(--success-message-text, #2e7d32);
-}
-
-.fail-message {
-  background-color: var(--fail-message-bg, #ffebee);
-  color: var(--fail-message-text, #c62828);
-}
-
-.new-game-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--new-game-button-bg, #4caf50);
-  color: white;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
-.new-game-button:hover {
-  background-color: var(--new-game-button-hover-bg, #43a047);
+.pause-button:hover {
+  background-color: var(--button-primary-hover);
+  box-shadow: 0 4px 8px var(--shadow-color);
 }
 
-/* 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .start-screen h2 {
-    color: var(--text-color, #e0e0e0);
-  }
-  
-  .auto-notes-toggle {
-    color: var(--text-color, #e0e0e0);
-  }
-  
-  .game-info {
-    background-color: var(--info-bg-color, #333);
-    color: var(--text-color, #e0e0e0);
-  }
-  
-  .message {
-    background-color: var(--message-bg, #333);
-    color: var(--text-color, #e0e0e0);
-  }
-  
-  .success-message {
-    background-color: var(--success-message-bg, #1b5e20);
-    color: var(--success-message-text, #a5d6a7);
-  }
-  
-  .fail-message {
-    background-color: var(--fail-message-bg, #b71c1c);
-    color: var(--fail-message-text, #ffcdd2);
-  }
+.pause-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }

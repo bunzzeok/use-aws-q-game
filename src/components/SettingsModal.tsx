@@ -1,6 +1,7 @@
 import React from 'react';
 import AutoSaveSettingsComponent from './AutoSaveSettings';
 import { AutoSaveSettings } from '../hooks/useAutoSave';
+import '../styles/Modal.css';
 import '../styles/SettingsModal.css';
 
 interface SettingsModalProps {
@@ -36,7 +37,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         </div>
         
         <div className="modal-actions">
-          <button className="close-button" onClick={onClose}>닫기</button>
+          <button className="modal-button secondary-button" onClick={onClose}>닫기</button>
         </div>
       </div>
     </div>

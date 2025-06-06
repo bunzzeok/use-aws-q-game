@@ -2,33 +2,20 @@
   max-width: 600px;
 }
 
-.statistics-modal h2 {
-  margin-top: 0;
-  color: var(--text-color);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-}
-
 .statistics-section {
   margin-bottom: 28px;
-}
-
-.statistics-section h3 {
-  margin-top: 0;
-  margin-bottom: 16px;
-  color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
 }
 
 .statistics-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+}
+
+@media (min-width: 500px) {
+  .statistics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .statistic-item {
@@ -57,13 +44,16 @@
   color: var(--text-color);
 }
 
+.table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
 .statistics-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 12px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px var(--shadow-color);
 }
 
 .statistics-table th,
@@ -102,59 +92,4 @@
   margin-bottom: 0;
   padding-bottom: 0;
   border-bottom: none;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.reset-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  background-color: var(--delete-button-bg);
-  color: var(--delete-button-text);
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-.reset-button:hover {
-  background-color: var(--delete-button-hover-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.reset-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px var(--shadow-color);
-}
-
-.close-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  background-color: var(--secondary-button-bg);
-  color: var(--secondary-button-text);
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-.close-button:hover {
-  background-color: var(--secondary-button-hover-bg);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.close-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px var(--shadow-color);
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GameState } from '../types';
 import { GameStorage } from '../utils/storage/gameStorage';
+import '../styles/Modal.css';
 import '../styles/SaveGameModal.css';
 
 interface SaveGameModalProps {
@@ -66,8 +67,8 @@ const SaveGameModal: React.FC<SaveGameModalProps> = ({
         </div>
         
         <div className="modal-actions">
-          <button className="cancel-button" onClick={onClose}>취소</button>
-          <button className="save-button" onClick={handleSave}>저장</button>
+          <button className="modal-button secondary-button" onClick={onClose}>취소</button>
+          <button className="modal-button primary-button" onClick={handleSave}>저장</button>
         </div>
       </div>
     </div>

@@ -1,60 +1,5 @@
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--modal-overlay-bg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(5px);
-  animation: fade-in 0.3s ease-out;
-}
-
-@keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-content {
-  background-color: var(--modal-bg);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 10px 30px var(--shadow-color);
+.load-game-modal {
   max-width: 600px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: scale-in 0.3s ease-out;
-}
-
-@keyframes scale-in {
-  from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.load-game-modal h2,
-.load-game-modal h3 {
-  color: var(--text-color);
-  margin-top: 0;
-}
-
-.load-game-modal h2 {
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 12px;
-  margin-bottom: 24px;
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.5px;
-}
-
-.load-game-modal h3 {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  margin-bottom: 16px;
 }
 
 .auto-save-section {
@@ -93,10 +38,15 @@
   box-shadow: 0 2px 8px var(--shadow-color);
 }
 
+.games-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .saved-game-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 16px;
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -106,6 +56,14 @@
   box-shadow: 0 2px 8px var(--shadow-color);
 }
 
+@media (min-width: 600px) {
+  .saved-game-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .saved-game-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--shadow-color);
@@ -113,121 +71,41 @@
 
 .game-info {
   flex: 1;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+  .game-info {
+    margin-bottom: 0;
+  }
 }
 
 .game-info h4 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--text-color);
   font-size: 18px;
   font-weight: 600;
 }
 
-.game-info p {
+.game-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.game-details p {
   margin: 4px 0;
   color: var(--secondary-text-color);
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.game-info p:nth-child(2)::before {
-  content: "🕒";
-}
-
-.game-info p:nth-child(3)::before {
-  content: "📊";
-}
-
-.game-info p:nth-child(4)::before {
-  content: "📅";
 }
 
 .game-actions {
   display: flex;
-  flex-direction: column;
   gap: 8px;
 }
 
-.load-button,
-.delete-button,
-.close-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px var(--shadow-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-
-.load-button {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.load-button::before {
-  content: "📂";
-  font-size: 16px;
-}
-
-.delete-button {
-  background-color: var(--secondary-button-bg);
-  color: var(--secondary-button-text);
-}
-
-.delete-button::before {
-  content: "🗑️";
-  font-size: 16px;
-}
-
-.delete-button.confirm {
-  background-color: var(--delete-button-bg);
-  color: var(--delete-button-text);
-}
-
-.close-button {
-  background-color: var(--secondary-button-bg);
-  color: var(--secondary-button-text);
-}
-
-.load-button:hover,
-.delete-button:hover,
-.close-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.load-button:hover {
-  background-color: var(--button-primary-hover);
-}
-
-.delete-button:hover {
-  background-color: var(--secondary-button-hover-bg);
-}
-
-.delete-button.confirm:hover {
-  background-color: var(--delete-button-hover-bg);
-}
-
-.close-button:hover {
-  background-color: var(--secondary-button-hover-bg);
-}
-
-.load-button:active,
-.delete-button:active,
-.close-button:active {
-  transform: translateY(0);
-  box-shadow: 0 1px 4px var(--shadow-color);
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 24px;
+@media (max-width: 599px) {
+  .game-actions {
+    justify-content: flex-end;
+  }
 }
