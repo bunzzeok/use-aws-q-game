@@ -60,14 +60,22 @@ const SaveGameModal: React.FC<SaveGameModalProps> = ({
         {error && <p className="error-message">{error}</p>}
         
         <div className="game-info">
-          <p>난이도:</p>
-          <p>{getDifficultyText(gameState.difficulty)}</p>
-          <p>진행 시간:</p>
-          <p>{formatTime(gameState.timer)}</p>
-          <p>오답 횟수:</p>
-          <p>{gameState.errorCount}/5</p>
-          <p>남은 힌트:</p>
-          <p>{gameState.hintsRemaining}</p>
+          <div className="game-info-item">
+            <span className="game-info-label">난이도</span>
+            <span className="game-info-value">{getDifficultyText(gameState.difficulty)}</span>
+          </div>
+          <div className="game-info-item">
+            <span className="game-info-label">진행 시간</span>
+            <span className="game-info-value">{formatTime(gameState.timer)}</span>
+          </div>
+          <div className="game-info-item">
+            <span className="game-info-label">오답 횟수</span>
+            <span className="game-info-value">{gameState.errorCount}/5</span>
+          </div>
+          <div className="game-info-item">
+            <span className="game-info-label">남은 힌트</span>
+            <span className="game-info-value">{gameState.hintsRemaining}</span>
+          </div>
         </div>
         
         <div className="modal-actions">

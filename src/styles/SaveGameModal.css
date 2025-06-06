@@ -54,25 +54,25 @@
   margin-bottom: 16px;
   box-shadow: 0 1px 4px var(--shadow-color);
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px 16px;
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.game-info p {
-  margin: 0;
-  color: var(--text-color);
-  font-size: 15px;
+.game-info-item {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.game-info p:nth-child(odd) {
+.game-info-label {
   font-weight: 500;
+  color: var(--text-color);
+  font-size: 14px;
 }
 
-.game-info p:nth-child(even) {
+.game-info-value {
   color: var(--secondary-text-color);
+  font-size: 15px;
 }
 
 .modal-actions {

@@ -88,14 +88,6 @@
   margin-bottom: 0;
 }
 
-@media (min-width: 500px) {
-  .saved-game-item {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
 .saved-game-item:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 6px var(--shadow-color);
@@ -107,62 +99,50 @@
   overflow: hidden;
 }
 
-@media (min-width: 500px) {
-  .game-info {
-    margin-bottom: 0;
-    margin-right: 10px;
-  }
-}
-
 .game-info h4 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
   color: var(--text-color);
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
 }
 
 .game-details {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 4px 12px;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+
+.game-detail-item {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
-.game-details p {
-  margin: 2px 0;
-  color: var(--secondary-text-color);
-  font-size: 14px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.game-details p:nth-child(odd) {
+.game-detail-label {
   font-weight: 500;
   color: var(--text-color);
+  font-size: 14px;
+}
+
+.game-detail-value {
+  color: var(--secondary-text-color);
+  font-size: 14px;
 }
 
 .game-actions {
   display: flex;
   gap: 8px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .game-actions button {
   padding: 8px 12px;
   font-size: 14px;
-  min-width: 80px;
-}
-
-@media (max-width: 499px) {
-  .game-actions {
-    justify-content: flex-end;
-    width: 100%;
-  }
-  
-  .game-actions button {
-    flex: 1;
-  }
+  flex: 1;
 }
