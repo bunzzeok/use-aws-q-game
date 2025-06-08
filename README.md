@@ -15,6 +15,8 @@ React와 TypeScript로 개발된 스도쿠 게임입니다. 다양한 난이도�
 
 A Sudoku game developed with React and TypeScript. Solve puzzles of various difficulties and improve your skills!
 
+## AWS Builder 계정 요청 제한으로 인하여 중지합니다.
+
 > 🤖 **AI 관리 프로젝트**: 이 프로젝트는 Amazon Q AI가 자동으로 관리, 개선 및 개발하는 실험적 프로젝트입니다.  
 > 🤖 **AI-Managed Project**: This is an experimental project that is automatically managed, improved, and developed by Amazon Q AI.
 
@@ -31,26 +33,32 @@ A Sudoku game developed with React and TypeScript. Solve puzzles of various diff
 ## 🎮 게임 특징 (Game Features)
 
 - **3가지 난이도** (3 Difficulty Levels)
+
   - 쉬움, 중간, 어려움 중에서 선택할 수 있습니다.
   - Choose from Easy, Medium, or Hard.
 
 - **힌트 시스템** (Hint System)
+
   - 난이도에 따라 제한된 힌트를 사용할 수 있습니다.
   - Use limited hints based on difficulty level.
 
 - **메모 기능** (Note-taking)
+
   - 각 셀에 메모를 남겨 가능한 숫자를 기록할 수 있습니다.
   - Take notes in each cell to record possible numbers.
 
 - **오답 제한** (Error Limit)
+
   - 5번 이상 틀리면 게임이 종료됩니다.
   - Game ends after 5 incorrect entries.
 
 - **타이머** (Timer)
+
   - 게임 완료 시간을 측정합니다.
   - Measures completion time.
 
 - **검증된 퍼즐** (Verified Puzzles)
+
   - 모든 퍼즐은 유일한 해결책을 가지도록 검증됩니다.
   - All puzzles are verified to have a unique solution.
 
@@ -61,17 +69,20 @@ A Sudoku game developed with React and TypeScript. Solve puzzles of various diff
 ## 🚀 실행 방법 (How to Run)
 
 1. **저장소 클론** (Clone the repository)
+
    ```bash
    git clone https://github.com/bunzzeok/use-aws-q-game.git
    cd use-aws-q-game
    ```
 
 2. **의존성 설치** (Install dependencies)
+
    ```bash
    npm install
    ```
 
 3. **개발 서버 실행** (Run development server)
+
    ```bash
    npm start
    ```
@@ -84,21 +95,27 @@ A Sudoku game developed with React and TypeScript. Solve puzzles of various diff
 ## 🎯 게임 방법 (How to Play)
 
 1. 시작 화면에서 난이도를 선택합니다.
+
    - Select difficulty level from the start screen.
 
 2. 빈 셀을 클릭하고 숫자를 입력합니다.
+
    - Click on empty cells and enter numbers.
 
 3. 메모 모드를 활성화하려면 "메모" 버튼을 클릭합니다.
+
    - Click the "Notes" button to activate note-taking mode.
 
 4. 잘못 입력한 숫자는 "지우기" 버튼으로 삭제할 수 있습니다.
+
    - Use the "Erase" button to delete incorrect entries.
 
 5. 어려운 셀은 "힌트" 버튼을 사용하여 정답을 확인할 수 있습니다 (제한된 횟수).
+
    - Use the "Hint" button for difficult cells (limited uses).
 
 6. 5번 이상 틀리면 게임이 종료됩니다.
+
    - Game ends after 5 incorrect entries.
 
 7. 모든 셀을 올바르게 채우면 게임이 완료됩니다.
@@ -120,6 +137,7 @@ A Sudoku game developed with React and TypeScript. Solve puzzles of various diff
 3. **CI/CD** - GitHub Actions를 통한 자동화된 테스트 및 배포
 
 테스트 실행 방법:
+
 ```bash
 # 모든 테스트 실행
 npm test
